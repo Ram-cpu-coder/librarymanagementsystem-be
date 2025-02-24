@@ -1,0 +1,70 @@
+@rooturl=http://localhost:9001/api/v1
+# auth end point
+@authEP={{rooturl}}/auth
+# Book end point
+@bookEP={{rooturl}}/books
+
+POST {{authEP}}/login
+Content-Type: application/json
+
+{
+  "email": "john@gmail.com",
+  "password":"password"
+}
+
+###
+POST {{authEP}}/register
+Content-Type: application/json
+
+{
+  "fName": "john",
+  "lName" : "Doe",
+  "email" : "john@gmail.com",
+  "phone" : "1234567",
+  "password" : "password"
+}
+
+### 
+GET {{authEP}}
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQwMzUyNTQ3LCJleHAiOjE3NDA0Mzg5NDd9.Ges8uDAMF5tbJyVG2gJdqiD7d2BYMhdXrM5uM6Ff58A
+
+### create a book 
+POST {{bookEP}}
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQwMzUyNTg2LCJleHAiOjE3NDA0Mzg5ODZ9.dX6dIFvQ8ZSNzMU2HUGZeK2RU30Fv9zSQimeH31MoII
+
+{
+"title" : "book1",
+"author" : "book author",
+"thumbnail" : "https://wallpapercave.com/wp/rdYAno5.jpg",
+"isbn" : "146",
+"genre": "horror",
+"publishedYear" : 2020
+}
+
+###
+GET {{bookEP}}
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQwMzU2MDM5LCJleHAiOjE3NDA0NDI0Mzl9.stTKbq_WAhFDKMZtYBBbdO4nialiBdlanzTwatgXvWo
+
+
+### get the public books
+GET {{bookEP}}/pub-books
+
+### update the book
+PUT {{bookEP}}
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQwMzU5NjE4LCJleHAiOjE3NDA0NDYwMTh9.2_KWglSo6FGf_NluOhGpTTF9yOWx7sEgF9dBD4vysuk
+Content-Type: application/json
+
+{
+ "status": "active",
+    "title": "book1",
+    "author": "book author",
+    "isbn": "146",
+    "publishedYear": 2020,
+    "thumbnail": "https://wallpapercave.com/wp/rdYAno5.jpg",
+    "description": "asljkdfhsahgfslkk",
+    "isAvailable": true,
+    "expectedAvailable": null,
+    "id": "67bbbe092e9edf0d5a0770b4",
+    "genre": "horror"
+}

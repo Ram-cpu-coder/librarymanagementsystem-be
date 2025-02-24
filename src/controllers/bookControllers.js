@@ -1,0 +1,85 @@
+import { getAllBooks, insertBook, updateBookModel } from "../models/books/BookModel.js";
+
+export const createBook = async (req, res, next) => {
+  try {
+    // create the book
+    const book = await insertBook(req.body);
+
+    book?._id
+      ? res.json({
+        status: "success",
+        message: "Book created successfully",
+        book,
+      })
+      : next({
+        status: 401,
+        message: "Book cannot be created!",
+      });
+  } catch (error) {
+    next({
+      status: 500,
+      message: "Error creating book",
+    });
+  }
+};
+
+
+export const adminGetAllBooks = async (req, res, next) => {
+  try {
+    const books = await getAllBooks()
+    res.json({
+      status: "success",
+      message: "Book fetched successfully",
+      books,
+    })
+
+  } catch (error) {
+    console.log(error)
+    next({
+      status: 500,
+      message: "Could not fetch the books"
+    })
+  }
+}
+
+export const getPubBooks = async (req, res, next) => {
+  try {
+    const books = await getAllBooks({
+      status: "active"
+    })
+    res.json({
+      status: "success",
+      message: "Book fetched successfully",
+      books,
+    })
+
+  } catch (error) {
+    console.log(error)
+    next({
+      status: 500,
+      message: "Could not fetch the books"
+    })
+  }
+}
+export const updateBook = async (req, res, next) => {
+  try {
+    const books = await updateBookModel(req.body)
+    books?._id ?
+      res.json({
+        status: "success",
+        message: "Book has been updated successfully",
+        books,
+      })
+      : next({
+        status: 401,
+        message: "Book can not be updated."
+      })
+
+  } catch (error) {
+    console.log(error)
+    next({
+      status: 500,
+      message: "Could not fetch the books"
+    })
+  }
+}
