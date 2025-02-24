@@ -1,6 +1,6 @@
 import { createNewUser, getUserByEmail } from "../models/users/UserModel.js";
 import { compareText, encryptText } from "../utils/bcrypt.js";
-import { jwtSign } from "../utils/jwt.js";
+import { jwtSign, refreshJwtSign } from "../utils/jwt.js";
 
 export const login = async (req, res, next) => {
   try {
@@ -18,12 +18,14 @@ export const login = async (req, res, next) => {
       };
 
       const token = await jwtSign(tokenData);
+      const refreshToken = await refreshJwtSign(tokenData)
 
       if (loginSuccess) {
         return res.status(200).json({
           status: "success",
           message: "Login Successful",
           accessToken: token,
+          refreshToken: refreshToken,
           user: {
             _id: userData._id,
             username: userData.username,
