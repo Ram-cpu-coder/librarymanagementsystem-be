@@ -26,12 +26,12 @@ Content-Type: application/json
 
 ### 
 GET {{authEP}}
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQwMzUyNTQ3LCJleHAiOjE3NDA0Mzg5NDd9.Ges8uDAMF5tbJyVG2gJdqiD7d2BYMhdXrM5uM6Ff58A
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQwNDQwNjIyLCJleHAiOjE3NDA0NDA2NTJ9.dRmjFej4INCkkq3d7UNxGJLpFTNA-uy6_OU72HwaEV8
 
 ### create a book 
 POST {{bookEP}}
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQwMzUyNTg2LCJleHAiOjE3NDA0Mzg5ODZ9.dX6dIFvQ8ZSNzMU2HUGZeK2RU30Fv9zSQimeH31MoII
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQwNDM5OTg2LCJleHAiOjE3NDA0Mzk5OTF9.yWkOuzq2tt-vqeS804G6oa4TztVgTl-ByEDGROEEFAE
 
 {
 "title" : "book1",
@@ -44,11 +44,16 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwu
 
 ###
 GET {{bookEP}}
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQwMzU2MDM5LCJleHAiOjE3NDA0NDI0Mzl9.stTKbq_WAhFDKMZtYBBbdO4nialiBdlanzTwatgXvWo
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQwNDQwMTQ5LCJleHAiOjE3NDA0NDAxNzl9.T_Gkh1kM4zCEk5ZT4FVuNSVKvNciZBGJbSwy_1YOTp0
 
 
 ### get the public books
 GET {{bookEP}}/pub-books
+
+### Delete the book 
+DELETE {{bookEP}}/67bbadbc8655a6e1c88ce9d5
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQwNDQzMDIxLCJleHAiOjE3NDA0NDMwNTF9.FVv2vOkEaWR0Gv8iGJPerwjdZwx-p2d6s1BdvjyZ2Vc
+
 
 ### update the book
 PUT {{bookEP}}
@@ -68,3 +73,8 @@ Content-Type: application/json
     "id": "67bbbe092e9edf0d5a0770b4",
     "genre": "horror"
 }
+
+###
+
+GET {{authEP}}/renew-jwt
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQwNDQwNjk0LCJleHAiOjE3NDE3MzY2OTR9.uEIjYc7V_8maGkLH4ghGETUCdKY1vuJf_5lUXeg_eKo

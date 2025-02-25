@@ -7,8 +7,9 @@ import {
   getUserDetail,
   login,
   register,
+  renewJwt,
 } from "../controllers/authControllers.js";
-import { authenticate, isAdmin } from "../middlewares/authMiddleware.js";
+import { authenticate, isAdmin, refreshAuthenticate } from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
@@ -21,5 +22,8 @@ router.post("/register", registerValidator, register);
 
 // get logged in user data
 router.get("/", authenticate, getUserDetail);
+
+// renew jwt
+router.get("/renew-jwt", refreshAuthenticate, renewJwt)
 
 export default router;

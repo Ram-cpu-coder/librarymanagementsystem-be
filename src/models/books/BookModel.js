@@ -11,6 +11,10 @@ export const getAllBooks = (filterObj) => {
   return BookSchema.find(filterObj);
 };
 
+// delete the books
+export const deleteBookModel = (id) => {
+  return BookSchema.findByIdAndDelete(id)
+}
 
 // update the books
 export const updateBookModel = ({ _id, ...bookObj }) => {

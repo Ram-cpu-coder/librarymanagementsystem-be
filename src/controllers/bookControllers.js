@@ -1,4 +1,4 @@
-import { getAllBooks, insertBook, updateBookModel } from "../models/books/BookModel.js";
+import { deleteBookModel, getAllBooks, insertBook, updateBookModel } from "../models/books/BookModel.js";
 
 export const createBook = async (req, res, next) => {
   try {
@@ -82,4 +82,29 @@ export const updateBook = async (req, res, next) => {
       message: "Could not fetch the books"
     })
   }
+}
+
+// delete method for bookController
+
+export const deleteBook = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const data = await deleteBookModel(id)
+    data ? res.json({
+      status: "success",
+      message: "Book has been updated successfully",
+      books,
+    }) : next({
+      status: 401,
+      message: "Book can not be updated."
+    })
+
+  } catch (error) {
+    console.log(error)
+    next({
+      status: 500,
+      message: "Could not fetch the book"
+    })
+  }
+
 }

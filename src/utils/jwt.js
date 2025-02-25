@@ -1,9 +1,12 @@
 import jwt from "jsonwebtoken";
+import { insertToken } from "../models/sessions/sessionSchema.js";
 
 export const jwtSign = async (signData) => {
-  return jwt.sign(signData, process.env.JWT_SECRET, {
+  const token = jwt.sign(signData, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRESIN,
   });
+  insertToken({ token })
+  return token;
 };
 
 export const jwtVerify = async (token) => {
