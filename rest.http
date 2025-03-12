@@ -26,25 +26,30 @@ Content-Type: application/json
 
 ### 
 GET {{authEP}}
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQwNDQwNjIyLCJleHAiOjE3NDA0NDA2NTJ9.dRmjFej4INCkkq3d7UNxGJLpFTNA-uy6_OU72HwaEV8
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQxODE4ODc0LCJleHAiOjE3NDE5MDUyNzR9.UFYTfYS976Ghegu43Lc9HuvrGZAMMsqXWNRsRLLeH9A
+
+### get students details
+GET {{authEP}}/students
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQxODE4ODc0LCJleHAiOjE3NDE5MDUyNzR9.UFYTfYS976Ghegu43Lc9HuvrGZAMMsqXWNRsRLLeH9A
 
 ### create a book 
-POST {{bookEP}}
+POST {{bookEP}}/add
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQwNDM5OTg2LCJleHAiOjE3NDA0Mzk5OTF9.yWkOuzq2tt-vqeS804G6oa4TztVgTl-ByEDGROEEFAE
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQxNjAzNzYxLCJleHAiOjE3NDE2OTAxNjF9.tnu1VbEw9Vi2k_pLkpiHc_lQEkNjEdICUsrH68LBL58
 
-{
-"title" : "book1",
-"author" : "book author",
-"thumbnail" : "https://wallpapercave.com/wp/rdYAno5.jpg",
-"isbn" : "146",
-"genre": "horror",
-"publishedYear" : 2020
-}
+{ "title": "The Future of Blockchain",
+    "author": "Ms. Clara Green",
+    "thumbnail": "https://wallpapercave.com/wp/g2jzVAw.jpg",
+    "isbn": "54247b",
+    "genre": "Blockchain",
+    "publishedYear": 2023, 
+    "description" : "sdfjlasdjflsadjlfjl"
+  }
+
 
 ###
 GET {{bookEP}}
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQwNDQwMTQ5LCJleHAiOjE3NDA0NDAxNzl9.T_Gkh1kM4zCEk5ZT4FVuNSVKvNciZBGJbSwy_1YOTp0
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQxNjc3ODA0LCJleHAiOjE3NDE3NjQyMDR9.5mqsv-Asa0QiqzQBC6bnIKogj3F2suMdMyqj2coLqZY
 
 
 ### get the public books
@@ -57,20 +62,20 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwu
 
 ### update the book
 PUT {{bookEP}}
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQwMzU5NjE4LCJleHAiOjE3NDA0NDYwMTh9.2_KWglSo6FGf_NluOhGpTTF9yOWx7sEgF9dBD4vysuk
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQxNjc4ODkwLCJleHAiOjE3NDE3NjUyOTB9.xcwFQ9W0OQfRKWzctRZTy9qAdGXlP06bpHPaZhzvLlc
 Content-Type: application/json
 
 {
- "status": "active",
+ "status": "inactive",
     "title": "book1",
     "author": "book author",
-    "isbn": "146",
+    "isbn": "13z446",
     "publishedYear": 2020,
     "thumbnail": "https://wallpapercave.com/wp/rdYAno5.jpg",
     "description": "asljkdfhsahgfslkk",
     "isAvailable": true,
     "expectedAvailable": null,
-    "id": "67bbbe092e9edf0d5a0770b4",
+    "_id": "67bbbdd62e9edf0d5a0770ac",
     "genre": "horror"
 }
 

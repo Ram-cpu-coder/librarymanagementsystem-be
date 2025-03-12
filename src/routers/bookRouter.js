@@ -6,7 +6,7 @@ import { createBook, adminGetAllBooks, updateBook, getPubBooks, deleteBook } fro
 const router = express.Router();
 
 // POST api/v1/books
-router.post("/", authenticate, isAdmin, createBookValidator, createBook);
+router.post("/add", authenticate, isAdmin, createBookValidator, createBook);
 router.get("/", authenticate, isAdmin, adminGetAllBooks)
 router.get("/pub-books", getPubBooks)
 router.delete("/:id", authenticate, isAdmin, deleteBook)

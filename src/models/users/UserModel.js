@@ -20,3 +20,8 @@ export const updateUser = (filter, updatedUserObject) => {
 export const deleteUserById = (_id) => {
   return UserSchema.findByIdAndDelete(_id);
 };
+
+// getStudents
+export const getStudents = () => {
+  return UserSchema.find({ role: "student" })
+}

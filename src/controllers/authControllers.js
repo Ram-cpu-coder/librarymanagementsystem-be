@@ -1,4 +1,4 @@
-import { createNewUser, getUserByEmail, updateUser } from "../models/users/UserModel.js";
+import { createNewUser, getStudents, getUserByEmail, updateUser } from "../models/users/UserModel.js";
 import { compareText, encryptText } from "../utils/bcrypt.js";
 import { jwtSign, refreshJwtSign } from "../utils/jwt.js";
 
@@ -97,7 +97,26 @@ export const getUserDetail = async (req, res, next) => {
   });
 };
 
+export const getStudentDetails = async (req, res, next) => {
+  try {
+    const data = await getStudents()
+    data ? res.status(400).json({
+      status: "success",
+      message: "Students List Fetched",
+      users: data
+    }) : res.status(401).json({
+      status: "error",
+      message: "No students found"
+    })
+  } catch (error) {
+    console.log(error)
+    return res.status(500).json({
+      status: "error",
+      message: error
+    })
 
+  }
+}
 export const renewJwt = async (req, res, next) => {
   // recreate the access token 
 

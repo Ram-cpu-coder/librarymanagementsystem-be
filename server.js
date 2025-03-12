@@ -44,7 +44,7 @@ connectMongoDB()
     // start server
     app.listen(PORT, (error) => {
       error
-        ? console.log(error)
+        ? console.log(error, "error")
         : console.log(`Server is running at http://localhost:${PORT}`);
     });
   })

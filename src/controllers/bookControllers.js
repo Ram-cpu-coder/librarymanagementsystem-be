@@ -79,7 +79,8 @@ export const updateBook = async (req, res, next) => {
     console.log(error)
     next({
       status: 500,
-      message: "Could not fetch the books"
+      message: "Could not fetch the books", error,
+      error: error?.message
     })
   }
 }
