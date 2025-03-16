@@ -93,11 +93,11 @@ export const deleteBook = async (req, res, next) => {
     const data = await deleteBookModel(id)
     data ? res.json({
       status: "success",
-      message: "Book has been updated successfully",
-      books,
+      message: "Book has been deleted successfully",
+      data,
     }) : next({
       status: 401,
-      message: "Book can not be updated."
+      message: "Book can not be deleted."
     })
 
   } catch (error) {

@@ -7,6 +7,7 @@ import { errorHandler } from "./src/middlewares/errorHandler.js";
 // Routers
 import authRouter from "./src/routers/authRouter.js";
 import bookRouter from "./src/routers/bookRouter.js";
+import borrowRouter from "./src/routers/borrowRouter.js"
 
 const PORT = process.env.PORT;
 const app = express();
@@ -32,6 +33,9 @@ app.use("/api/v1/auth", authRouter);
 
 // book route
 app.use("/api/v1/books", bookRouter);
+
+// borrow route
+app.use("/api/v1/borrow", borrowRouter)
 
 // error handler middle ware
 app.use(errorHandler);
