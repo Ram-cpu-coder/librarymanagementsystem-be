@@ -1,5 +1,5 @@
 import { updateBookModel } from "../models/books/BookModel.js";
-import { insertBorrow } from "../models/borrowHistory/borrowModel.js";
+import { getAllBorrows, insertBorrow } from "../models/borrowHistory/borrowModel.js";
 
 export const createBorrow = async (req, res, next) => {
     try {
@@ -27,10 +27,18 @@ export const createBorrow = async (req, res, next) => {
 
         if (data) {
             // upon successful insertion of the burrowing of the book
+
+            // updating the availability of the borrowed book
             const bookData = await updateBookModel(bookId, {
                 isAvailable: false,
                 expectedAvailable: dueDate
             })
+
+
+
+
+            // i am having issues in bookData that is updating the availability of the borrowed book
+            console.log(bookData)
             return res.status(200).json({
                 status: "success",
                 message: "Borrow Created !",
@@ -45,11 +53,25 @@ export const createBorrow = async (req, res, next) => {
             statusCode: 500,
             message: error?.message
         })
-
-        // return res.status(500).json({
-        //     status: error,
-        //     message: error?.message
-        // })
     }
 
+}
+
+export const getBorrow = async (req, res, next) => {
+    try {
+        const data = await getAllBorrows();
+
+        return res.status(200).json({
+            status: "success",
+            message: "Successfully fetched the borrows !!!",
+            data
+        })
+    } catch (error) {
+        console.log(error)
+        next({
+            statusCode: 500,
+            message: error?.message
+        })
+
+    }
 }

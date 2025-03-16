@@ -95,3 +95,7 @@ Content-Type: application/json
   "title" : "book1",
   "thumbnail" : "https://wallpapercave.com/wp/rdYAno5.jpg"
 }
+
+### getting the borrows 
+GET {{borrowEp}}
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQyMDgwODAwLCJleHAiOjE3NDIxNjcyMDB9.MFI-dyOtRukcsMe3TO58X4rzaXW5mmTBgtVUq4RKHrM

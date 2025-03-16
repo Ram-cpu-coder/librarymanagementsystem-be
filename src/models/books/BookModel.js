@@ -20,3 +20,4 @@ export const deleteBookModel = (id) => {
 export const updateBookModel = ({ _id, ...bookObj }) => {
   return BookSchema.findByIdAndUpdate(_id, bookObj, { new: true })
 };
+

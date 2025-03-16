@@ -5,7 +5,7 @@ export const insertBorrow = (borrowObj) => {
 }
 
 // get all the borrow
-export const getBorrow = () => {
+export const getAllBorrows = () => {
     return borrowSchema.find({})
 }
 
