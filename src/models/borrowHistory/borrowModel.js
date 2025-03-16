@@ -10,6 +10,12 @@ export const getAllBorrows = () => {
 }
 
 // getting the borrow by userId
-export const getBorrowsByUserId = (userId) => {
+export const getBorrowByIdModel = (userId) => {
     return borrowSchema.find({ userId })
+}
+
+// updating the borrow model
+
+export const updateBorrowModel = (_id, updateObj) => {
+    return borrowSchema.findByIdAndUpdate(_id, updateObj)
 }

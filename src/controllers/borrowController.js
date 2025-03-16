@@ -1,5 +1,5 @@
 import { updateBookModel } from "../models/books/BookModel.js";
-import { getAllBorrows, insertBorrow } from "../models/borrowHistory/borrowModel.js";
+import { getAllBorrows, getBorrowByIdModel, insertBorrow, updateBorrowModel } from "../models/borrowHistory/borrowModel.js";
 
 export const createBorrow = async (req, res, next) => {
     try {
@@ -73,5 +73,49 @@ export const getBorrow = async (req, res, next) => {
             message: error?.message
         })
 
+    }
+}
+
+export const getBurrowById = async (req, res, next) => {
+    try {
+
+        // 1. get the uesrId
+        const userId = req.userData._id;
+
+        // 2. get the borrowed books by id
+        const borrowedBooks = await getBorrowByIdModel(userId)
+        return res.status(201).json({
+            status: "success",
+            message: "Borrow Found",
+            borrowedBooks
+        })
+    } catch (error) {
+        console.log(error)
+        // next({
+
+        // })
+    }
+}
+
+export const updateBorrow = async (req, res, next) => {
+    try {
+        // 1. get the borrow id from the params
+        const { _id } = req.params;
+
+        // 2. update the borrow record 
+        const borrowedBook = await updateBorrowModel(_id, {
+            status: "returned",
+        })
+        // 3. update the book 
+        const updatedBook = await updateBookModel(borrowedBook.bookId, {
+            isAvailable: true
+        })
+        return res.status(200).json({
+            status: "success",
+            message: "Borrow Updated",
+            updatedBook
+        })
+    } catch (error) {
+        console.log(error)
     }
 }

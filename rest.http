@@ -87,7 +87,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwu
 
 ### creating the Borrow
 POST {{borrowEp}}
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQyMDgwODAwLCJleHAiOjE3NDIxNjcyMDB9.MFI-dyOtRukcsMe3TO58X4rzaXW5mmTBgtVUq4RKHrM
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQyMTY2OTUyLCJleHAiOjE3NDIyNTMzNTJ9.Y1S0EVY9HoMdCEzUd_lLD-_mDgimxbpOG7fVrdMjvGY
 Content-Type: application/json
 
 {
@@ -97,5 +97,13 @@ Content-Type: application/json
 }
 
 ### getting the borrows 
+GET {{borrowEp}}/get-all
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQyMTY2OTUyLCJleHAiOjE3NDIyNTMzNTJ9.Y1S0EVY9HoMdCEzUd_lLD-_mDgimxbpOG7fVrdMjvGY
+
+### getting the borrows by userId || fetch current user borrow
 GET {{borrowEp}}
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQyMDgwODAwLCJleHAiOjE3NDIxNjcyMDB9.MFI-dyOtRukcsMe3TO58X4rzaXW5mmTBgtVUq4RKHrM
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQyMTY2OTUyLCJleHAiOjE3NDIyNTMzNTJ9.Y1S0EVY9HoMdCEzUd_lLD-_mDgimxbpOG7fVrdMjvGY
+
+### returning the borrowed books
+PUT {{borrowEp}}/67d63c151872ac9d0317f50d
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQyMTY2OTUyLCJleHAiOjE3NDIyNTMzNTJ9.Y1S0EVY9HoMdCEzUd_lLD-_mDgimxbpOG7fVrdMjvGY

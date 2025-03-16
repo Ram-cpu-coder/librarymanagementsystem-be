@@ -101,7 +101,7 @@ export const getStudentDetails = async (req, res, next) => {
   try {
     const data = await getStudents()
     if (data) {
-      return res.status(400).json({
+      return res.status(200).json({
         status: "success",
         message: "Students List Fetched",
         users: data
