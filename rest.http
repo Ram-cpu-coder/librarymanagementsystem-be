@@ -10,7 +10,7 @@ POST {{authEP}}/login
 Content-Type: application/json
 
 {
-  "email": "john@gmail.com",
+  "email": "ac@gmail.com",
   "password":"password"
 }
 
@@ -51,7 +51,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwu
 
 ###
 GET {{bookEP}}
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQyMDgwODAwLCJleHAiOjE3NDIxNjcyMDB9.MFI-dyOtRukcsMe3TO58X4rzaXW5mmTBgtVUq4RKHrM
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFjQGdtYWlsLmNvbSIsImlhdCI6MTc0MjE4MjE3MSwiZXhwIjoxNzQyMjY4NTcxfQ.d-wY0xOI2_Q4Wf4GeKa3M8EXvSJ3jxBx4RW4eyXyGCo
 
 ### get the public books
 GET {{bookEP}}/pub-books
@@ -87,13 +87,13 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwu
 
 ### creating the Borrow
 POST {{borrowEp}}
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQyMTY2OTUyLCJleHAiOjE3NDIyNTMzNTJ9.Y1S0EVY9HoMdCEzUd_lLD-_mDgimxbpOG7fVrdMjvGY
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFjQGdtYWlsLmNvbSIsImlhdCI6MTc0MjE4MjE3MSwiZXhwIjoxNzQyMjY4NTcxfQ.d-wY0xOI2_Q4Wf4GeKa3M8EXvSJ3jxBx4RW4eyXyGCo
 Content-Type: application/json
 
 {
-  "bookId" : "67bbbdd62e9edf0d5a0770ac" ,
-  "title" : "book1",
-  "thumbnail" : "https://wallpapercave.com/wp/rdYAno5.jpg"
+  "bookId" : "67c62c4061559ea6ab12f09c" ,
+  "title" : "Cyber Security",
+  "thumbnail" : "https://media.istockphoto.com/id/2161896294/photo/woman-smiling-and-expressing-gratitude-during-a-conversation.jpg?s=2048x2048&w=is&k=20&c=vZuZrE23pOIArcX-tqyEBwhfU-FV_RTsYdbMTFTDPFg="
 }
 
 ### getting the borrows 
@@ -105,5 +105,5 @@ GET {{borrowEp}}
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQyMTY2OTUyLCJleHAiOjE3NDIyNTMzNTJ9.Y1S0EVY9HoMdCEzUd_lLD-_mDgimxbpOG7fVrdMjvGY
 
 ### returning the borrowed books
-PUT {{borrowEp}}/67d63c151872ac9d0317f50d
+PUT {{borrowEp}}/67d795b5b50a481688cb20b5
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQyMTY2OTUyLCJleHAiOjE3NDIyNTMzNTJ9.Y1S0EVY9HoMdCEzUd_lLD-_mDgimxbpOG7fVrdMjvGY

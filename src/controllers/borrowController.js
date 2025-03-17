@@ -15,11 +15,12 @@ export const createBorrow = async (req, res, next) => {
         const today = new Date();
 
         const dueDate = today.setDate(today.getDate() + BURROWINGDAYS, "day");
-
+        const returnedDate = 0;
         const borrowObj = {
             userId,
             bookId,
             dueDate,
+            returnedDate,
             title,
             thumbnail
         }
@@ -36,8 +37,6 @@ export const createBorrow = async (req, res, next) => {
 
 
 
-
-            // i am having issues in bookData that is updating the availability of the borrowed book
             console.log(bookData)
             return res.status(200).json({
                 status: "success",
@@ -96,19 +95,21 @@ export const getBurrowById = async (req, res, next) => {
         // })
     }
 }
-
+// returning the borrows
 export const updateBorrow = async (req, res, next) => {
     try {
+        const today = new Date()
         // 1. get the borrow id from the params
         const { _id } = req.params;
 
         // 2. update the borrow record 
         const borrowedBook = await updateBorrowModel(_id, {
             status: "returned",
+            returnedDate: today.getDate()
         })
         // 3. update the book 
         const updatedBook = await updateBookModel(borrowedBook.bookId, {
-            isAvailable: true
+            isAvailable: true,
         })
         return res.status(200).json({
             status: "success",
