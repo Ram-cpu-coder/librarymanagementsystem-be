@@ -8,6 +8,7 @@ import { errorHandler } from "./src/middlewares/errorHandler.js";
 import authRouter from "./src/routers/authRouter.js";
 import bookRouter from "./src/routers/bookRouter.js";
 import borrowRouter from "./src/routers/borrowRouter.js"
+import reviewRouter from "./src/routers/reviewRouter.js"
 
 const PORT = process.env.PORT;
 const app = express();
@@ -36,6 +37,12 @@ app.use("/api/v1/books", bookRouter);
 
 // borrow route
 app.use("/api/v1/borrow", borrowRouter)
+
+// review route
+app.use("/api/v1/review", reviewRouter)
+
+// thumbnail route
+app.use("/thumbnail", express.static("assets/thumbnails"))
 
 // error handler middle ware
 app.use(errorHandler);

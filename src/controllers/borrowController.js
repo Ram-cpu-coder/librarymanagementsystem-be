@@ -28,26 +28,21 @@ export const createBorrow = async (req, res, next) => {
 
         if (data) {
             // upon successful insertion of the burrowing of the book
-
-            // updating the availability of the borrowed book
-            const bookData = await updateBookModel(bookId, {
+            const updateObj = {
+                bookId: bookId,
                 isAvailable: false,
                 expectedAvailable: dueDate
-            })
-
-
-
-            console.log(bookData)
-            return res.status(200).json({
-                status: "success",
-                message: "Borrow Created !",
-                data,
-                bookData
-            })
+            }
+            // updating the availability of the borrowed book
+            const bookData = await updateBookModel(updateObj)
+            // console.log(bookData)
         }
+        return res.status(200).json({
+            status: "success",
+            message: "Borrow Created !",
+            data,
+        })
     } catch (error) {
-        console.log(error)
-
         next({
             statusCode: 500,
             message: error?.message
@@ -66,7 +61,7 @@ export const getBorrow = async (req, res, next) => {
             data
         })
     } catch (error) {
-        console.log(error)
+        // console.log(error)
         next({
             statusCode: 500,
             message: error?.message
@@ -89,10 +84,11 @@ export const getBurrowById = async (req, res, next) => {
             borrowedBooks
         })
     } catch (error) {
-        console.log(error)
-        // next({
-
-        // })
+        // console.log(error)
+        next({
+            statusCode: 500,
+            message: error?.message
+        })
     }
 }
 // returning the borrows
@@ -111,12 +107,17 @@ export const updateBorrow = async (req, res, next) => {
         const updatedBook = await updateBookModel(borrowedBook.bookId, {
             isAvailable: true,
         })
+
         return res.status(200).json({
             status: "success",
             message: "Borrow Updated",
             updatedBook
         })
     } catch (error) {
-        console.log(error)
+        // console.log(error)
+        next({
+            statusCode: 500,
+            message: error?.message
+        })
     }
 }

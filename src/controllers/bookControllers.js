@@ -1,8 +1,10 @@
 import { deleteBookModel, getAllBooks, insertBook, updateBookModel } from "../models/books/BookModel.js";
 
+// create the book
 export const createBook = async (req, res, next) => {
   try {
-    // create the book
+    console.log(111, req.file.filename)
+    req.body.thumbnail = "/thumbnail/" + req.file.filename;
     const book = await insertBook(req.body);
 
     book?._id
@@ -16,6 +18,7 @@ export const createBook = async (req, res, next) => {
         message: "Book cannot be created!",
       });
   } catch (error) {
+    console.log(error)
     next({
       status: 500,
       message: "Error creating book",
@@ -34,7 +37,7 @@ export const adminGetAllBooks = async (req, res, next) => {
     })
 
   } catch (error) {
-    console.log(error)
+    // console.log(error)
     next({
       status: 500,
       message: "Could not fetch the books"

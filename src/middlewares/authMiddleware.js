@@ -8,10 +8,10 @@ export const authenticate = async (req, res, next) => {
     const token = req.headers.authorization;
     // 1.1 find the header token from the database
     const tokenFromDb = await findToken(token)
-    console.log("token", tokenFromDb)
+    // console.log("token", tokenFromDb)
     // 2. verify the token
     const decodedData = await jwtVerify(tokenFromDb.token);
-    console.log("DECODED", decodedData);
+    // console.log("DECODED", decodedData);
 
     if (decodedData?.email) {
       // 3. find the user from the decoded data
@@ -44,7 +44,7 @@ export const authenticate = async (req, res, next) => {
       next(errorObj);
     }
   } catch (error) {
-    console.log("VERIFYJWT", error);
+    // console.log("VERIFYJWT", error);
     const errorObj = {
       statusCode: 401,
       message: error?.message ?? "Error Validating Token"
@@ -61,7 +61,7 @@ export const refreshAuthenticate = async (req, res, next) => {
 
     // 2. verify the token
     const decodedData = await refreshJwtVerify(token);
-    console.log("DECODED", decodedData);
+    // console.log("DECODED", decodedData);
 
     if (decodedData?.email) {
       // 3. find the user from the decoded data
@@ -94,7 +94,7 @@ export const refreshAuthenticate = async (req, res, next) => {
       next(errorObj);
     }
   } catch (error) {
-    console.log("VERIFYJWT", error);
+    // console.log("VERIFYJWT", error);
     const errorObj = {
       statusCode: 401,
       message: "Error Validating Token",

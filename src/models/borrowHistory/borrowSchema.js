@@ -40,7 +40,7 @@ const BorrowSchema = new mongoose.Schema(
         },
         status: {
             type: String,
-            enum: ["borrowed", "returned"],
+            enum: ["borrowed", "returned", "reviewed"],
             default: "borrowed"
         }
     },

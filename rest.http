@@ -10,7 +10,7 @@ POST {{authEP}}/login
 Content-Type: application/json
 
 {
-  "email": "ac@gmail.com",
+  "email": "john@gmail.com",
   "password":"password"
 }
 
@@ -87,7 +87,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwu
 
 ### creating the Borrow
 POST {{borrowEp}}
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFjQGdtYWlsLmNvbSIsImlhdCI6MTc0MjE4MjE3MSwiZXhwIjoxNzQyMjY4NTcxfQ.d-wY0xOI2_Q4Wf4GeKa3M8EXvSJ3jxBx4RW4eyXyGCo
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQyMjgyNTcxLCJleHAiOjE3NDIzNjg5NzF9.TxSQu_DTRtK7shBHMMi_AI5bz6NtJLn0xjOAnfyVHxQ
 Content-Type: application/json
 
 {
@@ -102,7 +102,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwu
 
 ### getting the borrows by userId || fetch current user borrow
 GET {{borrowEp}}
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQyMTY2OTUyLCJleHAiOjE3NDIyNTMzNTJ9.Y1S0EVY9HoMdCEzUd_lLD-_mDgimxbpOG7fVrdMjvGY
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQyMjgyNTcxLCJleHAiOjE3NDIzNjg5NzF9.TxSQu_DTRtK7shBHMMi_AI5bz6NtJLn0xjOAnfyVHxQ
 
 ### returning the borrowed books
 PUT {{borrowEp}}/67d795b5b50a481688cb20b5
