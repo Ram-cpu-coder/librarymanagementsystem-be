@@ -14,7 +14,7 @@ const BorrowSchema = new mongoose.Schema(
             ref: "Book",
             required: true
         },
-        burrowDate: {
+        borrowDate: {
             type: Date,
             default: Date.now(),
             required: true

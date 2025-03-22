@@ -6,6 +6,8 @@
 
 @borrowEp = {{rooturl}}/borrow
 
+@reviewEp = {{rooturl}}/review
+
 POST {{authEP}}/login
 Content-Type: application/json
 
@@ -98,7 +100,7 @@ Content-Type: application/json
 
 ### getting the borrows 
 GET {{borrowEp}}/get-all
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQyMTY2OTUyLCJleHAiOjE3NDIyNTMzNTJ9.Y1S0EVY9HoMdCEzUd_lLD-_mDgimxbpOG7fVrdMjvGY
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQyNjA5NzMxLCJleHAiOjE3NDI2OTYxMzF9.HJQwmEZ78cFJQlRq9MOLGQ19gaez4vsaiFROTzgj0Os
 
 ### getting the borrows by userId || fetch current user borrow
 GET {{borrowEp}}
@@ -107,3 +109,32 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwu
 ### returning the borrowed books
 PUT {{borrowEp}}/67d795b5b50a481688cb20b5
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQyMTY2OTUyLCJleHAiOjE3NDIyNTMzNTJ9.Y1S0EVY9HoMdCEzUd_lLD-_mDgimxbpOG7fVrdMjvGY
+
+### fetch Review
+GET {{reviewEp}}
+
+### fetch all review for admin 
+GET {{reviewEp}}/admin-reviews
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQyNjA5NzMxLCJleHAiOjE3NDI2OTYxMzF9.HJQwmEZ78cFJQlRq9MOLGQ19gaez4vsaiFROTzgj0Os
+
+### creating review 
+POST {{reviewEp}}/add-review
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQyNjA5NzMxLCJleHAiOjE3NDI2OTYxMzF9.HJQwmEZ78cFJQlRq9MOLGQ19gaez4vsaiFROTzgj0Os
+Content-Type: application/json
+
+{
+  "status" : "active",
+  "thumbnail" : "ksjdfhk",
+  "title" : "sdlfjlsdf",
+  "ratings" : 4,
+  "message" : "sdlfhshdkfhksladfghksdhgkhklsdgdhlkh",
+  "bookId": "67bbbdd62e9edf0d5a0770ac",
+  "borrowId" :"67d925bfab298f52091ca133",
+  "userName" : "john"
+}
+
+
+### update review for admin 
+PUT {{reviewEp}}/admin-edit-review
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQyNjA5NzMxLCJleHAiOjE3NDI2OTYxMzF9.HJQwmEZ78cFJQlRq9MOLGQ19gaez4vsaiFROTzgj0Os
+Content-Type: 

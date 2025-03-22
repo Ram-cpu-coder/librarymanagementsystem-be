@@ -7,8 +7,6 @@ export const createBorrow = async (req, res, next) => {
         // ask from where this userData will come
 
         const { bookId, title, thumbnail } = req.body;
-
-
         // due day is 15 days
         const BURROWINGDAYS = 15;
 

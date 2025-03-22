@@ -1,8 +1,8 @@
 import ReviewSchema from "./ReviewSchema.js"
 
 // public reviews
-export const fetchReviews = (userId) => {
-    return ReviewSchema.findById(userId)
+export const fetchReviews = (filterObj) => {
+    return ReviewSchema.find(filterObj)
 }
 // admin reviews
 export const fetchReviewsAdmin = () => {
