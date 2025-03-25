@@ -29,6 +29,10 @@ app.get("/", (req, res, next) => {
   res.json({ message: "server is healthy" });
 });
 
+// /assets
+
+app.use("/thumbnail", express.static("assets/images"));
+
 // auth route
 app.use("/api/v1/auth", authRouter);
 
@@ -41,8 +45,6 @@ app.use("/api/v1/borrow", borrowRouter)
 // review route
 app.use("/api/v1/review", reviewRouter)
 
-// thumbnail route
-app.use("/thumbnail", express.static("assets/thumbnails"))
 
 // error handler middle ware
 app.use(errorHandler);

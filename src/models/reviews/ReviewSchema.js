@@ -5,8 +5,8 @@ const reviewSchema = new mongoose.Schema(
     {
         status: {
             type: String,
+            enum: ["active", "inactive"],
             default: "inactive",
-            required: true
         },
         bookId: {
             type: mongoose.Types.ObjectId,

@@ -3,6 +3,7 @@ import { getUserByEmail } from "../models/users/UserModel.js";
 import { jwtVerify, refreshJwtVerify } from "../utils/jwt.js";
 
 export const authenticate = async (req, res, next) => {
+  // console.log("AUTHENTICATE")
   try {
     // 1. get the token
     const token = req.headers.authorization;
@@ -106,6 +107,7 @@ export const refreshAuthenticate = async (req, res, next) => {
 
 
 export const isAdmin = async (req, res, next) => {
+  // console.log("IS ADMIN")
   req.userData.role == "admin"
     ? next()
     : next({

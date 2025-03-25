@@ -13,7 +13,7 @@ export const createBorrow = async (req, res, next) => {
         const today = new Date();
 
         const dueDate = today.setDate(today.getDate() + BURROWINGDAYS, "day");
-        const returnedDate = 0;
+        let returnedDate = today.getDate();
         const borrowObj = {
             userId,
             bookId,
@@ -29,10 +29,11 @@ export const createBorrow = async (req, res, next) => {
             const updateObj = {
                 bookId: bookId,
                 isAvailable: false,
-                expectedAvailable: dueDate
+                expectedAvailable: dueDate,
+                returnedDate: returnedDate
             }
             // updating the availability of the borrowed book
-            const bookData = await updateBookModel(updateObj)
+            const bookData = await updateBookModel({ _id: bookId, ...updateObj })
             // console.log(bookData)
         }
         return res.status(200).json({
@@ -101,10 +102,12 @@ export const updateBorrow = async (req, res, next) => {
             status: "returned",
             returnedDate: today.getDate()
         })
-        // 3. update the book 
-        const updatedBook = await updateBookModel(borrowedBook.bookId, {
+        const updateObj = {
+            _id: borrowedBook.bookId,
             isAvailable: true,
-        })
+        }
+        // 3. update the book 
+        const updatedBook = await updateBookModel({ _id, ...updateObj })
 
         return res.status(200).json({
             status: "success",

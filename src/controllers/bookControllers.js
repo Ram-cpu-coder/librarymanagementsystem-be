@@ -3,7 +3,6 @@ import { deleteBookModel, getAllBooks, insertBook, updateBookModel } from "../mo
 // create the book
 export const createBook = async (req, res, next) => {
   try {
-    console.log(111, req.file.filename)
     req.body.thumbnail = "/thumbnail/" + req.file.filename;
     const book = await insertBook(req.body);
 
@@ -66,6 +65,11 @@ export const getPubBooks = async (req, res, next) => {
 }
 export const updateBook = async (req, res, next) => {
   try {
+
+    req.body.thumbnail = "/thumbnail/" + req.file.filename;
+
+    console.log(req.file)
+
     const books = await updateBookModel(req.body)
     books?._id ?
       res.json({

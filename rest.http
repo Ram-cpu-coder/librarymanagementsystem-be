@@ -34,7 +34,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwu
 
 ### get students details
 GET {{authEP}}/students
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQxODE4ODc0LCJleHAiOjE3NDE5MDUyNzR9.UFYTfYS976Ghegu43Lc9HuvrGZAMMsqXWNRsRLLeH9A
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQyOTE1MTcyLCJleHAiOjE3NDMwMDE1NzJ9.KvC8b1HW664b7Vyx7TjhOvYuBB0dkJ9FNt72E8YuyDk
 
 ### create a book 
 POST {{bookEP}}/add
@@ -104,30 +104,31 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwu
 
 ### getting the borrows by userId || fetch current user borrow
 GET {{borrowEp}}
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQyMjgyNTcxLCJleHAiOjE3NDIzNjg5NzF9.TxSQu_DTRtK7shBHMMi_AI5bz6NtJLn0xjOAnfyVHxQ
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQyOTA5MjUxLCJleHAiOjE3NDI5OTU2NTF9.CtJwvfsSsXBfWtjYR4yB8Y1yzAKh91HcKTgbnjF9DC8
 
 ### returning the borrowed books
-PUT {{borrowEp}}/67d795b5b50a481688cb20b5
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQyMTY2OTUyLCJleHAiOjE3NDIyNTMzNTJ9.Y1S0EVY9HoMdCEzUd_lLD-_mDgimxbpOG7fVrdMjvGY
+PUT {{borrowEp}}/67e0c09bfe58799e6ab48124
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQyOTA5MjUxLCJleHAiOjE3NDI5OTU2NTF9.CtJwvfsSsXBfWtjYR4yB8Y1yzAKh91HcKTgbnjF9DC8
 
 ### fetch Review
 GET {{reviewEp}}
 
 ### fetch all review for admin 
 GET {{reviewEp}}/admin-reviews
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQyNjA5NzMxLCJleHAiOjE3NDI2OTYxMzF9.HJQwmEZ78cFJQlRq9MOLGQ19gaez4vsaiFROTzgj0Os
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQyOTE1MTcyLCJleHAiOjE3NDMwMDE1NzJ9.KvC8b1HW664b7Vyx7TjhOvYuBB0dkJ9FNt72E8YuyDk
 
 ### creating review 
 POST {{reviewEp}}/add-review
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQyNjA5NzMxLCJleHAiOjE3NDI2OTYxMzF9.HJQwmEZ78cFJQlRq9MOLGQ19gaez4vsaiFROTzgj0Os
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQyOTE1MTcyLCJleHAiOjE3NDMwMDE1NzJ9.KvC8b1HW664b7Vyx7TjhOvYuBB0dkJ9FNt72E8YuyDk
 Content-Type: application/json
 
 {
-  "status" : "active",
-  "thumbnail" : "ksjdfhk",
-  "title" : "sdlfjlsdf",
-  "ratings" : 4,
-  "message" : "sdlfhshdkfhksladfghksdhgkhklsdgdhlkh",
+  "userId" :"67cce80a120b1a5766a5f4b4",
+  "status" : "inactive",
+  "thumbnail" : "alskdjfljsdlfasldfj",
+  "title" : "Saya",
+  "ratings" : 5,
+  "message" : "Wonderful book, worth reading",
   "bookId": "67bbbdd62e9edf0d5a0770ac",
   "borrowId" :"67d925bfab298f52091ca133",
   "userName" : "john"
@@ -136,5 +137,5 @@ Content-Type: application/json
 
 ### update review for admin 
 PUT {{reviewEp}}/admin-edit-review
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQyNjA5NzMxLCJleHAiOjE3NDI2OTYxMzF9.HJQwmEZ78cFJQlRq9MOLGQ19gaez4vsaiFROTzgj0Os
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQyOTA5MjUxLCJleHAiOjE3NDI5OTU2NTF9.CtJwvfsSsXBfWtjYR4yB8Y1yzAKh91HcKTgbnjF9DC8
 Content-Type: 
