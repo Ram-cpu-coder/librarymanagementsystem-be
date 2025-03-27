@@ -40,9 +40,9 @@ export const insertReviewController = async (req, res, next) => {
         const userId = req.userData._id
         // console.log(userId)
         const updateObj = req.body
-        // const reviewObj = { userId, ...updateObj }
+        const reviewObj = { userId, ...updateObj }
         // console.log(reviewObj)
-        const data = await insertReview(updateObj)
+        const data = await insertReview(reviewObj)
 
         // update the borrowstatus
         const updateBorrow = await updateBorrowModel(data.borrowId, {
@@ -65,8 +65,16 @@ export const insertReviewController = async (req, res, next) => {
 export const updateReviewByIdController = async (req, res, next) => {
     try {
         // update the review 
+        const { _id } = req.body;
 
-        // update the borrowStatus
+        const response = await updateReviewById(_id, req.body)
+        if (response) {
+            return res.status(200).json({
+                status: "success",
+                message: "Updated the status of Review!",
+                response
+            })
+        }
     } catch (error) {
         next({
             statusCode: 500,

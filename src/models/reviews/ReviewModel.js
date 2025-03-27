@@ -14,6 +14,7 @@ export const insertReview = (obj) => {
     return ReviewSchema(obj).save()
 }
 // edit review for admin
-export const updateReviewById = (id) => {
-    return ReviewSchema.findByIdAndUpdate(id)
+export const updateReviewById = (id, status) => {
+    //  updateByIdAndUpdate always takes id and an object
+    return ReviewSchema.findByIdAndUpdate(id, status, { new: true })
 }
