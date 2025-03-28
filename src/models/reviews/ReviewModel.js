@@ -18,3 +18,7 @@ export const updateReviewById = (id, status) => {
     //  updateByIdAndUpdate always takes id and an object
     return ReviewSchema.findByIdAndUpdate(id, status, { new: true })
 }
+
+export const deleteReviewById = (id) => {
+    return ReviewSchema.findByIdAndDelete(id);
+}

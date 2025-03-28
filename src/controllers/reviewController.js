@@ -1,5 +1,5 @@
 import { updateBorrowModel } from "../models/borrowHistory/borrowModel.js"
-import { fetchReviews, fetchReviewsAdmin, insertReview, updateReviewById } from "../models/reviews/ReviewModel.js"
+import { deleteReviewById, fetchReviews, fetchReviewsAdmin, insertReview, updateReviewById } from "../models/reviews/ReviewModel.js"
 
 
 // getting all the active reviews
@@ -65,14 +65,32 @@ export const insertReviewController = async (req, res, next) => {
 export const updateReviewByIdController = async (req, res, next) => {
     try {
         // update the review 
-        const { _id } = req.body;
-
-        const response = await updateReviewById(_id, req.body)
+        const { _id, status } = req.body;
+        const response = await updateReviewById(_id, { status })
         if (response) {
             return res.status(200).json({
                 status: "success",
                 message: "Updated the status of Review!",
                 response
+            })
+        }
+    } catch (error) {
+        next({
+            statusCode: 500,
+            message: error?.message
+        })
+    }
+}
+
+export const deleteReviewByIdController = async (req, res, next) => {
+    try {
+        const { _id } = req.body;
+        const data = await deleteReviewById(_id);
+        if (data) {
+            return res.status(200).json({
+                status: "success",
+                message: "Deleted Successfully !",
+                data
             })
         }
     } catch (error) {

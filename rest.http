@@ -115,7 +115,7 @@ GET {{reviewEp}}
 
 ### fetch all review for admin 
 GET {{reviewEp}}/admin-reviews
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQzMTE4NTQzLCJleHAiOjE3NDMyMDQ5NDN9.pQGfDP_7Qm5w2RMlwpDqISZNewgZrf2jtTMt6EeqKBA
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQzMjAzMDM2LCJleHAiOjE3NDMyODk0MzZ9.VNcrFe-m3gF7JAedDi4MaCMlKmUZRYq3JwjelEB7QHs
 
 ### creating review 
 POST {{reviewEp}}/add-review
@@ -141,6 +141,15 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwu
 Content-Type: application/json
 
 {
-  "_id": "67e404570e05d95a49108684",
+  "_id": "67e4045e0e05d95a49108696",
   "status" : "active"
+}
+
+### DELETE REVIEW BY ADMIN BY ID
+DELETE {{reviewEp}}/delete-review
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQzMjAzMDM2LCJleHAiOjE3NDMyODk0MzZ9.VNcrFe-m3gF7JAedDi4MaCMlKmUZRYq3JwjelEB7QHs
+Content-Type: application/json
+
+{
+  "_id": "67e404570e05d95a49108684"
 }

@@ -1,6 +1,6 @@
 import express from "express";
 import { authenticate, isAdmin } from "../middlewares/authMiddleware.js";
-import { fetchReviewsAdminController, fetchReviewsController, insertReviewController, updateReviewByIdController } from "../controllers/reviewController.js";
+import { deleteReviewByIdController, fetchReviewsAdminController, fetchReviewsController, insertReviewController, updateReviewByIdController } from "../controllers/reviewController.js";
 
 
 const router = express.Router()
@@ -18,5 +18,7 @@ router.post("/add-review", authenticate, insertReviewController)
 
 // edit review for admin
 router.put("/admin-edit-review", authenticate, isAdmin, updateReviewByIdController)
+
+router.delete("/delete-review", authenticate, isAdmin, deleteReviewByIdController)
 
 export default router
