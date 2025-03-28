@@ -119,10 +119,11 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwu
 
 ### creating review 
 POST {{reviewEp}}/add-review
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQyOTE1MTcyLCJleHAiOjE3NDMwMDE1NzJ9.KvC8b1HW664b7Vyx7TjhOvYuBB0dkJ9FNt72E8YuyDk
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQzMjAzMDM2LCJleHAiOjE3NDMyODk0MzZ9.VNcrFe-m3gF7JAedDi4MaCMlKmUZRYq3JwjelEB7QHs
 Content-Type: application/json
 
 {
+  "heading": "Hello", 
   "userId" :"67cce80a120b1a5766a5f4b4",
   "status" : "inactive",
   "thumbnail" : "alskdjfljsdlfasldfj",
