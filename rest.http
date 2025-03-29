@@ -154,3 +154,8 @@ Content-Type: application/json
 {
   "_id": "67e404570e05d95a49108684"
 }
+
+
+### review for user
+GET {{reviewEp}}/user-review
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQzMjAzMDM2LCJleHAiOjE3NDMyODk0MzZ9.VNcrFe-m3gF7JAedDi4MaCMlKmUZRYq3JwjelEB7QHs

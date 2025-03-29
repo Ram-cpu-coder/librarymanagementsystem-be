@@ -8,6 +8,10 @@ export const fetchReviews = (filterObj) => {
 export const fetchReviewsAdmin = () => {
     return ReviewSchema.find({})
 }
+// review
+export const fetchReviewUser = (id) => {
+    return ReviewSchema.find({ userId: id, status: "active" })
+}
 
 // create review
 export const insertReview = (obj) => {

@@ -1,5 +1,5 @@
 import { updateBorrowModel } from "../models/borrowHistory/borrowModel.js"
-import { deleteReviewById, fetchReviews, fetchReviewsAdmin, insertReview, updateReviewById } from "../models/reviews/ReviewModel.js"
+import { deleteReviewById, fetchReviews, fetchReviewsAdmin, fetchReviewUser, insertReview, updateReviewById } from "../models/reviews/ReviewModel.js"
 
 
 // getting all the active reviews
@@ -18,6 +18,29 @@ export const fetchReviewsController = async (req, res, next) => {
         })
     }
 }
+
+// fetchReviewOfUsers
+export const fetchReviewOfUsers = async (req, res, next) => {
+    try {
+
+        const id = req.userData._id
+        const reviews = await fetchReviewUser(id)
+
+        if (reviews) {
+            return res.status(200).json({
+                status: "success",
+                message: "Reviews Fetched!",
+                reviews
+            })
+        }
+    } catch (error) {
+        next({
+            statusCode: 500,
+            message: error?.message,
+        })
+    }
+}
+
 // getting all the reviews for admin
 export const fetchReviewsAdminController = async (req, res, next) => {
     try {
