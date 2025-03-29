@@ -1,4 +1,4 @@
-import { createNewUser, getStudents, getUserByEmail, updateUser } from "../models/users/UserModel.js";
+import { createNewUser, deleteUserById, getStudents, getUserByEmail, updateUser } from "../models/users/UserModel.js";
 import { compareText, encryptText } from "../utils/bcrypt.js";
 import { jwtSign, refreshJwtSign } from "../utils/jwt.js";
 
@@ -70,6 +70,7 @@ export const register = async (req, res, next) => {
       email,
       password,
       phone,
+      profilePic: "./assets/Profile.png"
     });
 
     return res.status(201).json({
@@ -134,4 +135,46 @@ export const renewJwt = async (req, res, next) => {
     message: "Token Refreshed",
     accessToken: token
   })
+}
+
+export const updateUserController = async (req, res, next) => {
+  try {
+    req.body.profilePic = "/profilePic/" + req.file.filename
+    const userId = req.userData._id;
+    const updateObj = req.body
+
+    const data = await updateUser(userId, updateObj)
+    if (data) {
+      return res.status(200).json({
+        status: "success",
+        message: "Updated Successfully!",
+        data
+      })
+    }
+  } catch (error) {
+    next({
+      statusCodE: 400,
+      message: error?.message,
+    });
+  }
+}
+
+export const deleteUserController = async (req, res, next) => {
+  try {
+    const { _id } = req.body
+    const data = await deleteUserById(_id)
+    if (data) {
+      return res.status(200).json({
+        status: "success",
+        message: "User Deleted !",
+        data
+      })
+    }
+  } catch (error) {
+    console.log(error)
+    next({
+      statusCodE: 400,
+      message: error?.message,
+    });
+  }
 }

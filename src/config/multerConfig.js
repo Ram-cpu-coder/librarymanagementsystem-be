@@ -4,7 +4,11 @@ import path from "path";
 // define the storage
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, "assets/images");
+        let uploadPath = "assets/images"; // this is the default 
+        if (file.fieldname === "profilePic") {
+            uploadPath = "assets/profilePics"
+        }
+        cb(null, uploadPath);
     },
 
     filename: function (req, file, cb) {

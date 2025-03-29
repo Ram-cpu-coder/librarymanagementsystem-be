@@ -29,9 +29,13 @@ app.get("/", (req, res, next) => {
   res.json({ message: "server is healthy" });
 });
 
+
 // /assets
 
 app.use("/thumbnail", express.static("assets/images"));
+
+// profilePic
+app.use("/profilePic", express.static('assets/profilePics'))
 
 // auth route
 app.use("/api/v1/auth", authRouter);

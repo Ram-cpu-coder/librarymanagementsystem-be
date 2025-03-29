@@ -1,3 +1,4 @@
+
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
@@ -24,6 +25,10 @@ const userSchema = new mongoose.Schema(
       unique: true,
       index: 1,
       required: true,
+    },
+    profilePic: {
+      type: String,
+      default: "",
     },
     password: {
       type: String,

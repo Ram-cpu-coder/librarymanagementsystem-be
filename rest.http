@@ -34,7 +34,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwu
 
 ### get students details
 GET {{authEP}}/students
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQyOTE1MTcyLCJleHAiOjE3NDMwMDE1NzJ9.KvC8b1HW664b7Vyx7TjhOvYuBB0dkJ9FNt72E8YuyDk
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQzMjAzMDM2LCJleHAiOjE3NDMyODk0MzZ9.VNcrFe-m3gF7JAedDi4MaCMlKmUZRYq3JwjelEB7QHs
 
 ### create a book 
 POST {{bookEP}}/add
@@ -159,3 +159,12 @@ Content-Type: application/json
 ### review for user
 GET {{reviewEp}}/user-review
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQzMjAzMDM2LCJleHAiOjE3NDMyODk0MzZ9.VNcrFe-m3gF7JAedDi4MaCMlKmUZRYq3JwjelEB7QHs
+
+### delete the user 
+DELETE {{authEP}}/delete-user
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQzMjE4MDEwLCJleHAiOjE3NDMzMDQ0MTB9.FLvQ7It3CHhj6j2SwFTGle22R_iLf0WOeKshI5QOnZ8
+Content-Type: application/json
+
+{
+  "_id":"67cce80a120b1a5766a5f4b4"
+}
