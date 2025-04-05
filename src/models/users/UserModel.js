@@ -25,3 +25,8 @@ export const deleteUserById = (_id) => {
 export const getStudents = () => {
   return UserSchema.find({ role: "student" })
 }
+
+// get users
+export const getUsersModel = () => {
+  return UserSchema.find({})
+}

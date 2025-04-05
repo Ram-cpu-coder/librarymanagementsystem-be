@@ -1,4 +1,7 @@
-import { createNewUser, deleteUserById, getStudents, getUserByEmail, updateUser } from "../models/users/UserModel.js";
+import { v4 as uuidv4 } from "uuid";
+import { insertToken } from "../models/sessions/sessionSchema.js";
+import { createNewUser, deleteUserById, getStudents, getUserByEmail, getUsersModel, updateUser } from "../models/users/UserModel.js";
+import { userActivationEmail } from "../services/emailServices.js";
 import { compareText, encryptText } from "../utils/bcrypt.js";
 import { jwtSign, refreshJwtSign } from "../utils/jwt.js";
 
@@ -72,6 +75,31 @@ export const register = async (req, res, next) => {
       phone,
       profilePic: "./assets/Profile.png"
     });
+    if (!data._id) {
+      return res.status(400).json({
+        status: "error",
+        message: "Email sending failed! Registration aborted!"
+      });
+    }
+    const session = await insertToken({
+      token: uuidv4(),
+      association: data.email
+    })
+    console.log(session, "session")
+    if (!session._id) {
+      return res.status(400).json({
+        status: "error",
+        message: "Email sending failed! Registration aborted!"
+      });
+    } else {
+      const url = `${process.env.ROOT_URL}/verify-user?sessionId=${session._id}&t=${session.token}`
+
+      const userActivation = await userActivationEmail({
+        email: data.email,
+        userName: data.fName,
+        url
+      })
+    }
 
     return res.status(201).json({
       status: "success",
@@ -80,7 +108,6 @@ export const register = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error.message);
-
     next({
       statusCodE: 400,
       message: error?.message,
@@ -120,6 +147,25 @@ export const getStudentDetails = async (req, res, next) => {
       message: "Internal error"
     })
 
+  }
+}
+export const getUsersDetail = async (req, res, next) => {
+  try {
+    const data = await getUsersModel()
+
+    if (data) {
+      return res.status(200).json({
+        status: "success",
+        message: "Fetched",
+        data
+      })
+    }
+  } catch (error) {
+    return res.status(200).json({
+      status: "success",
+      message: "Token Refreshed",
+      accessToken: token
+    })
   }
 }
 export const renewJwt = async (req, res, next) => {

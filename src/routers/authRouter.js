@@ -8,6 +8,7 @@ import {
   deleteUserController,
   getStudentDetails,
   getUserDetail,
+  getUsersDetail,
   login,
   register,
   renewJwt,
@@ -34,6 +35,9 @@ router.put("/edit-profile", authenticate, upload.single('profilePic'), updateUse
 
 // get all the student's user data 
 router.get("/students", authenticate, isAdmin, getStudentDetails)
+
+// get all the users data 
+router.get("/users", authenticate, getUsersDetail)
 
 // renew jwt
 router.get("/renew-jwt", refreshAuthenticate, renewJwt)

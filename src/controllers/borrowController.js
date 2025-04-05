@@ -1,5 +1,5 @@
 import { updateBookModel } from "../models/books/BookModel.js";
-import { getAllBorrows, getBorrowByIdModel, insertBorrow, updateBorrowModel } from "../models/borrowHistory/borrowModel.js";
+import { deleteBorrowModel, getAllBorrows, getBorrowByIdModel, insertBorrow, updateBorrowModel } from "../models/borrowHistory/borrowModel.js";
 
 export const createBorrow = async (req, res, next) => {
     try {
@@ -13,7 +13,7 @@ export const createBorrow = async (req, res, next) => {
         const today = new Date();
 
         const dueDate = today.setDate(today.getDate() + BURROWINGDAYS, "day");
-        let returnedDate = today.getDate();
+        let returnedDate = null;
         const borrowObj = {
             userId,
             bookId,
@@ -93,14 +93,17 @@ export const getBurrowById = async (req, res, next) => {
 // returning the borrows
 export const updateBorrow = async (req, res, next) => {
     try {
-        const today = new Date()
+        const today = new Date();
+        const dateOfReturning =
+            new Date(today.getFullYear(), today.getMonth(), today.getDate());
+
         // 1. get the borrow id from the params
         const { _id } = req.params;
 
         // 2. update the borrow record 
         const borrowedBook = await updateBorrowModel(_id, {
             status: "returned",
-            returnedDate: today.getDate()
+            returnedDate: dateOfReturning
         })
         const updateObj = {
             _id: borrowedBook.bookId,
@@ -112,10 +115,31 @@ export const updateBorrow = async (req, res, next) => {
         return res.status(200).json({
             status: "success",
             message: "Borrow Updated",
-            updatedBook
+            updatedBook,
+            borrowedBook
         })
     } catch (error) {
         // console.log(error)
+        next({
+            statusCode: 500,
+            message: error?.message
+        })
+    }
+}
+
+// delete borrow
+export const deleteBorrow = async (req, res, next) => {
+    try {
+        const { _id } = req.body
+        const data = await deleteBorrowModel(_id)
+        if (data) {
+            return res.status(200).json({
+                status: "success",
+                message: "Deleted Successfully!",
+                data
+            })
+        }
+    } catch (error) {
         next({
             statusCode: 500,
             message: error?.message

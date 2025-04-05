@@ -34,9 +34,10 @@ const BorrowSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-        returnDate: {
+        returnedDate: {
             // add when returned 
             type: Date,
+            default: "YYYY/MM/DD",
         },
         status: {
             type: String,

@@ -37,11 +37,9 @@ export const registerValidator = (req, res, next) => {
 // update user profile validation 
 export const updateUserValidator = (req, res, next) => {
   const updateSchema = Joi.object({
-    email: Joi.string().email({ minDomainSegments: 2 }).required(),
     fName: Joi.string().required(),
     lName: Joi.string().required(),
     phone: Joi.string().required(),
-    password: Joi.string().required(),
   });
   joiValidator(updateSchema, req, res, next)
 }

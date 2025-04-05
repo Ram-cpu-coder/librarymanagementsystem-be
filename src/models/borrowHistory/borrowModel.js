@@ -17,5 +17,10 @@ export const getBorrowByIdModel = (userId) => {
 // updating the borrow model
 
 export const updateBorrowModel = (_id, updateObj) => {
-    return borrowSchema.findByIdAndUpdate(_id, updateObj)
+    return borrowSchema.findByIdAndUpdate(_id, updateObj, { new: true })
+}
+
+// delete borrow model
+export const deleteBorrowModel = (_id) => {
+    return borrowSchema.findByIdAndDelete(_id);
 }

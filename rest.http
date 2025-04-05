@@ -32,6 +32,11 @@ Content-Type: application/json
 GET {{authEP}}
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQxODE4ODc0LCJleHAiOjE3NDE5MDUyNzR9.UFYTfYS976Ghegu43Lc9HuvrGZAMMsqXWNRsRLLeH9A
 
+
+###getting all the users
+GET {{authEP}}/users
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQzMzA3NDk1LCJleHAiOjE3NDMzOTM4OTV9.hoRq-VQXYjNcU1ivVh6HPoAV5najO5m-mBvpz3piXu4
+
 ### get students details
 GET {{authEP}}/students
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQzMjAzMDM2LCJleHAiOjE3NDMyODk0MzZ9.VNcrFe-m3gF7JAedDi4MaCMlKmUZRYq3JwjelEB7QHs
@@ -104,11 +109,11 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwu
 
 ### getting the borrows by userId || fetch current user borrow
 GET {{borrowEp}}
-Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQyOTA5MjUxLCJleHAiOjE3NDI5OTU2NTF9.CtJwvfsSsXBfWtjYR4yB8Y1yzAKh91HcKTgbnjF9DC8
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQzMjk5MTI2LCJleHAiOjE3NDMzODU1MjZ9.9kPgSf9NSrxXk3CLU9d1BUs0zJy30-oF7XPr1UANZQo
 
 ### returning the borrowed books
-PUT {{borrowEp}}/67e0c09bfe58799e6ab48124
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQyOTA5MjUxLCJleHAiOjE3NDI5OTU2NTF9.CtJwvfsSsXBfWtjYR4yB8Y1yzAKh91HcKTgbnjF9DC8
+PUT {{borrowEp}}/67e8a426dde1eb0e5d66185f
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwiaWF0IjoxNzQzMjk5MTI2LCJleHAiOjE3NDMzODU1MjZ9.9kPgSf9NSrxXk3CLU9d1BUs0zJy30-oF7XPr1UANZQo
 
 ### fetch Review
 GET {{reviewEp}}
