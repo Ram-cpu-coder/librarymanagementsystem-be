@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
-import { insertToken } from "../models/sessions/sessionSchema.js";
+import { insertRegisterToken } from "../models/sessions/sessionSchema.js";
 import { createNewUser, deleteUserById, getStudents, getUserByEmail, getUsersModel, updateUser } from "../models/users/UserModel.js";
 import { userActivationEmail } from "../services/emailServices.js";
 import { compareText, encryptText } from "../utils/bcrypt.js";
@@ -81,11 +81,10 @@ export const register = async (req, res, next) => {
         message: "Email sending failed! Registration aborted!"
       });
     }
-    const session = await insertToken({
+    const session = await insertRegisterToken({
       token: uuidv4(),
-      association: data.email
+      associate: data.email
     })
-    console.log(session, "session")
     if (!session._id) {
       return res.status(400).json({
         status: "error",

@@ -9,6 +9,7 @@ import authRouter from "./src/routers/authRouter.js";
 import bookRouter from "./src/routers/bookRouter.js";
 import borrowRouter from "./src/routers/borrowRouter.js"
 import reviewRouter from "./src/routers/reviewRouter.js"
+import verifyEmailRouter from "./src/routers/verifyEmailRouter.js"
 
 const PORT = process.env.PORT;
 const app = express();
@@ -48,6 +49,9 @@ app.use("/api/v1/borrow", borrowRouter)
 
 // review route
 app.use("/api/v1/review", reviewRouter)
+
+// verifying the account
+app.use("/verify-user", verifyEmailRouter)
 
 
 // error handler middle ware

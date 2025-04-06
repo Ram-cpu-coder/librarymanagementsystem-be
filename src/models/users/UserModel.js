@@ -30,3 +30,8 @@ export const getStudents = () => {
 export const getUsersModel = () => {
   return UserSchema.find({})
 }
+
+// finding the user by id
+export const findUserById = (id) => {
+  return UserSchema.findById(id)
+}
