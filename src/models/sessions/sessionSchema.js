@@ -19,11 +19,11 @@ const sessionSchema = new mongoose.Schema(baseSessionSchema, { timestamps: true 
 
 // registering session
 const registerSessionSchema = new mongoose.Schema({
-    ...baseSessionSchema, createdAt:
+    ...baseSessionSchema,
+    createdAt:
     {
-        type: Date, default: Date.now, expires: 60 * 60 * 1
+        type: Date, default: Date.now, expires: 60 * 60 * 1 * 24
     }
-
 })
 
 const SessionSchema = mongoose.model("Sessions", sessionSchema)

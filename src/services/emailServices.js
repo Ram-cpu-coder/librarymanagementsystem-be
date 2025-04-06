@@ -1,7 +1,12 @@
-import { userActivationEmailTemplate } from "./emailTemplate.js"
+import { sendingOTP, userActivationEmailTemplate } from "./emailTemplate.js"
 import { eTransporter } from "./emailTransport.js";
 
 export const userActivationEmail = async (obj) => {
     const info = await eTransporter().sendMail(userActivationEmailTemplate(obj))
     return info.messageId;
+}
+
+export const sendOTP = async ({ email, fName, OTPforgotPassword }) => {
+    const info = await eTransporter().sendMail(sendingOTP({ email, fName, OTPforgotPassword }))
+    return info.messageId
 }

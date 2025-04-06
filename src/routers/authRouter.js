@@ -6,6 +6,7 @@ import {
 } from "../middlewares/joiValidation.js";
 import {
   deleteUserController,
+  forgotPassword,
   getStudentDetails,
   getUserDetail,
   getUsersDetail,
@@ -26,6 +27,9 @@ router.post("/login", loginValidator, login);
 
 // register api
 router.post("/register", registerValidator, register);
+
+// forgot password
+router.post("/forgot-password", forgotPassword)
 
 // get logged in user data
 router.get("/", authenticate, getUserDetail);

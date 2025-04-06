@@ -1,4 +1,4 @@
-import { findRegisterSessionById, findRegisterToken } from "../models/sessions/sessionSchema.js"
+import { findRegisterSessionById } from "../models/sessions/sessionSchema.js"
 import { getUserByEmail, updateUser } from "../models/users/UserModel.js"
 
 export const verifyEmailController = async (req, res, next) => {
@@ -39,7 +39,7 @@ export const verifyEmailController = async (req, res, next) => {
 
         return res.status(200).json({
             status: "success",
-            message: "Successfully Registered!",
+            message: "Your Account has been Successfully verified!",
             verifiedUpdatedUser
         })
     } catch (error) {
@@ -48,5 +48,29 @@ export const verifyEmailController = async (req, res, next) => {
             message: "Internal error while verifying the user!",
             errorMessage: error.message
         })
+    }
+}
+export const verifyTokenForgotPassword = async (req, res, next) => {
+
+}
+
+export const generateOTPController = async (req, res) => {
+    try {
+        const OTP = Math.ceil(Math.random() * 1000);
+        console.log(OTP)
+
+        return OTP
+        // return res.status(200).json({
+        //     status: "success",
+        //     message: "Successfully, generated OTP!",
+        //     OTP
+        // })
+    } catch (error) {
+
+        throw new Error(error.message)
+        // return res.status(500).json({
+        //     status: "error",
+        //     message: error.message,
+        // });
     }
 }

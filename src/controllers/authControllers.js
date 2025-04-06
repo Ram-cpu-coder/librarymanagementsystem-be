@@ -1,9 +1,10 @@
 import { v4 as uuidv4 } from "uuid";
 import { insertRegisterToken } from "../models/sessions/sessionSchema.js";
 import { createNewUser, deleteUserById, getStudents, getUserByEmail, getUsersModel, updateUser } from "../models/users/UserModel.js";
-import { userActivationEmail } from "../services/emailServices.js";
+import { sendOTP, userActivationEmail } from "../services/emailServices.js";
 import { compareText, encryptText } from "../utils/bcrypt.js";
 import { jwtSign, refreshJwtSign } from "../utils/jwt.js";
+import { generateOTPController } from "./verifyEmailController.js";
 
 export const login = async (req, res, next) => {
   try {
@@ -11,8 +12,13 @@ export const login = async (req, res, next) => {
 
     // const userData = await User.findOne({ email });
     const userData = await getUserByEmail(email);
-
-    if (userData) {
+    if (!userData.isVerified === true) {
+      return next({
+        statusCode: 401,
+        message: "Verify your Account please!"
+      })
+    }
+    if (userData && userData.isVerified === true) {
       // compare plain password and encrypted password
       const loginSuccess = await compareText(password, userData.password);
 
@@ -102,26 +108,80 @@ export const register = async (req, res, next) => {
 
     return res.status(201).json({
       status: "success",
-      message: "Registered Successfully !!!",
+      message: "Registered Successfully! Please check your mail for the verification Link!",
       data,
     });
   } catch (error) {
     console.log(error.message);
     next({
-      statusCodE: 400,
+      statusCode: 400,
       message: error?.message,
     });
   }
 };
 
-export const getUserDetail = async (req, res, next) => {
-  req.userData.password = "";
+export const forgotPassword = async (req, res) => {
+  try {
+    const { email } = req.body
+    // find the user 
+    const user = await getUserByEmail(email)
 
-  return res.json({
-    status: "success",
-    message: "User Detail",
-    user: req.userData,
-  });
+    // Check if user exists
+    if (!user) {
+      return res.status(404).json({
+        status: "error",
+        message: "User not found",
+      });
+    }
+    const { fName } = user
+
+    console.log(user, 9998)
+
+    const OTPforgotPassword = await generateOTPController()
+
+    await sendOTP({ email, fName, OTPforgotPassword })
+    return res.status(200).json({
+      status: "success",
+      message: "OTP has been sent successfully!"
+    })
+
+  } catch (error) {
+    console.log(error.message, 234)
+    // return next({
+    //   statusCode: 500,
+    //   message: error.message,
+    // })
+
+    return res.status(500).json({
+      status: "error",
+      message: error.message,
+    });
+
+  }
+}
+export const getUserDetail = async (req, res, next) => {
+
+  try {
+    req.userData.password = "";
+
+    // Ensure userData exists
+    if (!req.userData) {
+      return res.status(400).json({
+        status: "error",
+        message: "User not found",
+      });
+    }
+    return res.json({
+      status: "success",
+      message: "User Detail",
+      user: req.userData,
+    });
+  } catch (error) {
+    return next({
+      statusCode: 500,
+      message: error.message,
+    })
+  }
 };
 
 export const getStudentDetails = async (req, res, next) => {
@@ -148,6 +208,7 @@ export const getStudentDetails = async (req, res, next) => {
 
   }
 }
+
 export const getUsersDetail = async (req, res, next) => {
   try {
     const data = await getUsersModel()
@@ -167,6 +228,7 @@ export const getUsersDetail = async (req, res, next) => {
     })
   }
 }
+
 export const renewJwt = async (req, res, next) => {
   // recreate the access token 
 
@@ -198,7 +260,7 @@ export const updateUserController = async (req, res, next) => {
     }
   } catch (error) {
     next({
-      statusCodE: 400,
+      statusCode: 400,
       message: error?.message,
     });
   }
@@ -218,7 +280,7 @@ export const deleteUserController = async (req, res, next) => {
   } catch (error) {
     console.log(error)
     next({
-      statusCodE: 400,
+      statusCode: 400,
       message: error?.message,
     });
   }

@@ -56,7 +56,6 @@ app.use("/verify-user", verifyEmailRouter)
 
 // error handler middle ware
 app.use(errorHandler);
-
 // database connection
 connectMongoDB()
   .then(() => {
