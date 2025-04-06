@@ -1,4 +1,4 @@
-import { findRegisterSessionById } from "../models/sessions/sessionSchema.js"
+import { findOTPByAssociate, findRegisterSessionById } from "../models/sessions/sessionSchema.js"
 import { getUserByEmail, updateUser } from "../models/users/UserModel.js"
 
 export const verifyEmailController = async (req, res, next) => {
@@ -50,27 +50,30 @@ export const verifyEmailController = async (req, res, next) => {
         })
     }
 }
-export const verifyTokenForgotPassword = async (req, res, next) => {
-
-}
-
-export const generateOTPController = async (req, res) => {
+export const verifyOTPForgotPassword = async ({ associate, OTP }) => {
     try {
-        const OTP = Math.ceil(Math.random() * 1000);
-        console.log(OTP)
+        // get the OTP from database
+        const OTPFromDB = await findOTPByAssociate({ associate, OTP })
 
-        return OTP
-        // return res.status(200).json({
-        //     status: "success",
-        //     message: "Successfully, generated OTP!",
-        //     OTP
-        // })
+        if (!OTPFromDB) {
+            return "Invalid OTP, Try Again!"
+        }
+
+        if (OTPFromDB.expiresAt < new Date()) {
+            return "OTP has expired!"
+        }
+        // OTP is valid, you can proceed with the next step (e.g., reset the password)
+        return "OTP has been Verified!"
     } catch (error) {
-
         throw new Error(error.message)
-        // return res.status(500).json({
-        //     status: "error",
-        //     message: error.message,
-        // });
+    }
+}
+// generation of the OTP
+export const generateOTPController = async (req, res, next) => {
+    try {
+        const OTP = Math.ceil(Math.random() * 100000);
+        return OTP
+    } catch (error) {
+        throw new Error(error.message)
     }
 }

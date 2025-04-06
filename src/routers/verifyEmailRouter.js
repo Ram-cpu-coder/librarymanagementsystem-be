@@ -1,9 +1,8 @@
 import express from "express";
-import { generateOTPController, verifyEmailController, verifyTokenForgotPassword } from "../controllers/verifyEmailController.js";
+import { verifyEmailController, verifyOTPForgotPassword } from "../controllers/verifyEmailController.js";
 const router = express.Router()
 
 router.get("/", verifyEmailController)
-router.post("/", verifyTokenForgotPassword)
-// router.get("/", generateOTPController)
+router.post("/", verifyOTPForgotPassword)
 
 export default router;

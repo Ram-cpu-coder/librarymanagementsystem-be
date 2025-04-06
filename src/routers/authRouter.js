@@ -13,6 +13,7 @@ import {
   login,
   register,
   renewJwt,
+  updatePassword,
   updateUserController,
 } from "../controllers/authControllers.js";
 import { authenticate, isAdmin, refreshAuthenticate } from "../middlewares/authMiddleware.js";
@@ -30,6 +31,9 @@ router.post("/register", registerValidator, register);
 
 // forgot password
 router.post("/forgot-password", forgotPassword)
+
+// update password
+router.post("/update-password", updatePassword)
 
 // get logged in user data
 router.get("/", authenticate, getUserDetail);

@@ -1,10 +1,11 @@
 import { v4 as uuidv4 } from "uuid";
-import { insertRegisterToken } from "../models/sessions/sessionSchema.js";
+import { insertOTP, insertRegisterToken } from "../models/sessions/sessionSchema.js";
 import { createNewUser, deleteUserById, getStudents, getUserByEmail, getUsersModel, updateUser } from "../models/users/UserModel.js";
 import { sendOTP, userActivationEmail } from "../services/emailServices.js";
 import { compareText, encryptText } from "../utils/bcrypt.js";
 import { jwtSign, refreshJwtSign } from "../utils/jwt.js";
-import { generateOTPController } from "./verifyEmailController.js";
+import { generateOTPController, verifyOTPForgotPassword } from "./verifyEmailController.js";
+
 
 export const login = async (req, res, next) => {
   try {
@@ -120,7 +121,7 @@ export const register = async (req, res, next) => {
   }
 };
 
-export const forgotPassword = async (req, res) => {
+export const forgotPassword = async (req, res, next) => {
   try {
     const { email } = req.body
     // find the user 
@@ -139,6 +140,17 @@ export const forgotPassword = async (req, res) => {
 
     const OTPforgotPassword = await generateOTPController()
 
+    // setting the expiry time
+    const today = new Date();
+
+    if (OTPforgotPassword) {
+      const otpObj = {
+        OTP: OTPforgotPassword,
+        expiresAt: new Date(today.getMinutes() + 15 * 60 * 1000),
+        associate: email
+      }
+      await insertOTP(otpObj)
+    }
     await sendOTP({ email, fName, OTPforgotPassword })
     return res.status(200).json({
       status: "success",
@@ -147,18 +159,40 @@ export const forgotPassword = async (req, res) => {
 
   } catch (error) {
     console.log(error.message, 234)
-    // return next({
-    //   statusCode: 500,
-    //   message: error.message,
-    // })
-
-    return res.status(500).json({
-      status: "error",
+    return next({
+      statusCode: 500,
       message: error.message,
-    });
-
+    })
   }
 }
+
+// update password
+export const updatePassword = async (req, res, next) => {
+  try {
+    // get the OTP from user
+    const { associate, OTP } = req.body;
+    console.log(req.body, 200)
+
+    const isOTPverified = await verifyOTPForgotPassword({ associate, OTP })
+    console.log(isOTPverified, 100)
+
+    if (isOTPverified !== "OTP has been Verified!") {
+      return next({
+        statusCode: 400,
+        message: isOTPverified
+      })
+    }
+
+
+  } catch (error) {
+    console.log(error.message, "Error")
+    return next({
+      statusCode: 500,
+      message: error.message
+    })
+  }
+}
+
 export const getUserDetail = async (req, res, next) => {
 
   try {

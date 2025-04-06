@@ -13,6 +13,26 @@ const baseSessionSchema = {
     }
 }
 
+// OTP schema
+const otpSchema = new mongoose.Schema({
+
+    OTP: {
+        type: Number,
+        required: true,
+    },
+    expiresAt: {
+        type: Date
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
+    },
+    associate: {
+        type: String,
+        required: true
+    }
+
+})
 
 // login session 
 const sessionSchema = new mongoose.Schema(baseSessionSchema, { timestamps: true })
@@ -26,9 +46,14 @@ const registerSessionSchema = new mongoose.Schema({
     }
 })
 
+// otpSession 
+const OTPSchema = mongoose.model("OTP", otpSchema)
+
+
 const SessionSchema = mongoose.model("Sessions", sessionSchema)
 
 const RegisterSessionSchema = mongoose.model("RegisterSessions", registerSessionSchema)
+
 
 // for login session
 
@@ -48,4 +73,13 @@ export const findRegisterToken = (token) => {
 }
 export const findRegisterSessionById = (id) => {
     return RegisterSessionSchema.findById(id)
+}
+
+// for OTP session
+export const insertOTP = (otpObj) => {
+    return OTPSchema(otpObj).save()
+}
+
+export const findOTPByAssociate = ({ associate, otp }) => {
+    return OTPSchema.findOne({ associate, otp })
 }
