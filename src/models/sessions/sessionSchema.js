@@ -21,7 +21,8 @@ const otpSchema = new mongoose.Schema({
         required: true,
     },
     expiresAt: {
-        type: Date
+        type: Date,
+        default: new Date(Date.now() + 15 * 60 * 1000)
     },
     createdAt: {
         type: Date,
@@ -82,4 +83,8 @@ export const insertOTP = (otpObj) => {
 
 export const findOTPByAssociate = ({ associate, otp }) => {
     return OTPSchema.findOne({ associate, otp })
+}
+
+export const deleteOTP = (_id) => {
+    return OTPSchema.deleteOne({ _id })
 }

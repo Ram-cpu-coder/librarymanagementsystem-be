@@ -54,7 +54,6 @@ export const verifyOTPForgotPassword = async ({ associate, OTP }) => {
     try {
         // get the OTP from database
         const OTPFromDB = await findOTPByAssociate({ associate, OTP })
-
         if (!OTPFromDB) {
             return "Invalid OTP, Try Again!"
         }

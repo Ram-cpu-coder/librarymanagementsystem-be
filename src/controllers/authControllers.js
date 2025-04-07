@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
-import { insertOTP, insertRegisterToken } from "../models/sessions/sessionSchema.js";
+import { deleteOTP, findOTPByAssociate, insertOTP, insertRegisterToken } from "../models/sessions/sessionSchema.js";
 import { createNewUser, deleteUserById, getStudents, getUserByEmail, getUsersModel, updateUser } from "../models/users/UserModel.js";
 import { sendOTP, userActivationEmail } from "../services/emailServices.js";
 import { compareText, encryptText } from "../utils/bcrypt.js";
@@ -136,8 +136,6 @@ export const forgotPassword = async (req, res, next) => {
     }
     const { fName } = user
 
-    console.log(user, 9998)
-
     const OTPforgotPassword = await generateOTPController()
 
     // setting the expiry time
@@ -146,7 +144,6 @@ export const forgotPassword = async (req, res, next) => {
     if (OTPforgotPassword) {
       const otpObj = {
         OTP: OTPforgotPassword,
-        expiresAt: new Date(today.getMinutes() + 15 * 60 * 1000),
         associate: email
       }
       await insertOTP(otpObj)
@@ -170,8 +167,7 @@ export const forgotPassword = async (req, res, next) => {
 export const updatePassword = async (req, res, next) => {
   try {
     // get the OTP from user
-    const { associate, OTP } = req.body;
-    console.log(req.body, 200)
+    const { associate, OTP, password } = req.body;
 
     const isOTPverified = await verifyOTPForgotPassword({ associate, OTP })
     console.log(isOTPverified, 100)
@@ -181,8 +177,26 @@ export const updatePassword = async (req, res, next) => {
         statusCode: 400,
         message: isOTPverified
       })
+    } else {
+      const foundUser = await getUserByEmail(associate)
+      const updatedPassword = await updateUser(foundUser._id, { password: password })
+      console.log(updatedPassword, "pselgjsdjlg")
+      if (!updatedPassword) {
+        next({
+          statusCode: 400,
+          message: "Error in updating Password!"
+        })
+      }
+      if (updatedPassword) {
+        const foundOTPdB = await findOTPByAssociate({ associate, OTP })
+        console.log(foundOTPdB, 3495)
+        await deleteOTP(foundOTPdB._id)
+      }
     }
-
+    return res.status(200).json({
+      status: "success",
+      message: "Successfully Verified!"
+    })
 
   } catch (error) {
     console.log(error.message, "Error")

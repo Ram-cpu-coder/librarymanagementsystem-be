@@ -43,6 +43,15 @@ export const updateUserValidator = (req, res, next) => {
   });
   joiValidator(updateSchema, req, res, next)
 }
+
+// update password valaidation 
+// export const updatePasswordValidator = (req, res, next) => {
+//   const updatePasswordSchema = Joi.object({
+//     password: Joi.string().required()
+//   })
+//   joiValidator(updatePasswordSchema, req, res, next)
+// }
+
 // create book validator
 export const createBookValidator = (req, res, next) => {
   console.log("TEST");
