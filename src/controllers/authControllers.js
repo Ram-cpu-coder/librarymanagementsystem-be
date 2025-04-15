@@ -179,7 +179,10 @@ export const updatePassword = async (req, res, next) => {
       })
     } else {
       const foundUser = await getUserByEmail(associate)
-      const updatedPassword = await updateUser(foundUser._id, { password: password })
+      const hashedPw = await encryptText(password)
+      // encryption of the password
+
+      const updatedPassword = await updateUser(foundUser._id, { password: hashedPw })
       console.log(updatedPassword, "pselgjsdjlg")
       if (!updatedPassword) {
         next({
@@ -195,7 +198,7 @@ export const updatePassword = async (req, res, next) => {
     }
     return res.status(200).json({
       status: "success",
-      message: "Successfully Verified!"
+      message: "Password changed successfully!"
     })
 
   } catch (error) {
@@ -279,7 +282,6 @@ export const getUsersDetail = async (req, res, next) => {
 
 export const renewJwt = async (req, res, next) => {
   // recreate the access token 
-
   const tokenData = {
     email: req.userData.email,
   };
@@ -288,7 +290,7 @@ export const renewJwt = async (req, res, next) => {
   return res.status(200).json({
     status: "success",
     message: "Token Refreshed",
-    accessToken: token
+    accessJWT: token
   })
 }
 
