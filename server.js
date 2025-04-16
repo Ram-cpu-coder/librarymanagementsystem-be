@@ -4,7 +4,7 @@ import { connectMongoDB } from "./src/config/mongoConfig.js";
 import morgan from "morgan";
 import { errorHandler } from "./src/middlewares/errorHandler.js";
 import dotenv from "dotenv";
-
+dotenv.config();
 // Routers
 import authRouter from "./src/routers/authRouter.js";
 import bookRouter from "./src/routers/bookRouter.js";
@@ -13,7 +13,7 @@ import reviewRouter from "./src/routers/reviewRouter.js"
 import verifyEmailRouter from "./src/routers/verifyEmailRouter.js"
 
 const PORT = process.env.PORT;
-dotenv.config();
+
 const app = express();
 
 // log middleware
