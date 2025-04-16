@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken";
 import { insertToken } from "../models/sessions/sessionSchema.js";
 
 export const jwtSign = async (signData) => {
+  console.log(process.env.JWT_SECRET, key)
   const token = jwt.sign(signData, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRESIN,
   });

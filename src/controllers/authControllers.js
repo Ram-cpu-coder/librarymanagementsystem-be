@@ -31,6 +31,7 @@ export const login = async (req, res, next) => {
       };
       // token and refreshJwtToken
       const token = await jwtSign(tokenData);
+      console.log(token, "token")
       const refreshToken = await refreshJwtSign(tokenData)
 
       // save the refresh token in the user data 
