@@ -9,10 +9,13 @@ import { generateOTPController, verifyOTPForgotPassword } from "./verifyEmailCon
 
 export const login = async (req, res, next) => {
   try {
+    console.log("login")
     const { email, password } = req.body;
+    console.log(email, password)
 
     // const userData = await User.findOne({ email });
     const userData = await getUserByEmail(email);
+
     if (!userData.isVerified === true) {
       return next({
         statusCode: 401,
@@ -60,6 +63,7 @@ export const login = async (req, res, next) => {
       });
     }
   } catch (error) {
+    console.log(error)
     res.status(500).json({
       status: "error",
       message: "Login error!",
