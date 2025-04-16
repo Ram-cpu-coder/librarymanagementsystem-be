@@ -13,6 +13,7 @@ const joiValidator = (schema, req, res, next) => {
 
 // login validator
 export const loginValidator = (req, res, next) => {
+  console.log("validation")
   const loginSchema = Joi.object({
     email: Joi.string().email({ minDomainSegments: 2 }).required(),
     password: Joi.string().required(),

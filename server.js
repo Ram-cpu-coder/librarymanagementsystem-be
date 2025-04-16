@@ -26,6 +26,7 @@ const allowedOrigins = [
   "https://lms-823yigjtd-ram-cpu-coders-projects.vercel.app",
   "https://lms-hazel-mu.vercel.app",
   "https://lms-xi-jade.vercel.app",
+  "http://localhost:9001"
 ];
 
 app.use(cors({
