@@ -98,7 +98,7 @@ export const register = async (req, res, next) => {
         message: "Email sending failed! Registration aborted!"
       });
     } else {
-      const url = `${process.env.ROOT_URL}verify-user?sessionId=${session._id}&t=${session.token}`
+      const url = `${process.env.ROOT_URL}/verify-user?sessionId=${session._id}&t=${session.token}`
 
       const userActivation = await userActivationEmail({
         email: data.email,
