@@ -22,7 +22,23 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 // request body parser
-app.use(cors({ origin: 'https://lms-823yigjtd-ram-cpu-coders-projects.vercel.app', 'https://lms-xi-jade.vercel.app' }));
+const allowedOrigins = [
+  "https://lms-823yigjtd-ram-cpu-coders-projects.vercel.app",
+  "https://lms-hazel-mu.vercel.app",
+  "https://lms-xi-jade.vercel.app",
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin.replace(/\/$/, ""))) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
+}));
+
 app.use(express.json());
 
 //server status
