@@ -22,7 +22,7 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 // request body parser
-app.use(cors({ origin: 'https://lms-hazel-mu.vercel.app' }));
+app.use(cors({ origin: 'https://lms-823yigjtd-ram-cpu-coders-projects.vercel.app/' }));
 app.use(express.json());
 
 //server status
