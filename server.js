@@ -3,6 +3,7 @@ import cors from "cors";
 import { connectMongoDB } from "./src/config/mongoConfig.js";
 import morgan from "morgan";
 import { errorHandler } from "./src/middlewares/errorHandler.js";
+import dotenv from "dotenv";
 
 // Routers
 import authRouter from "./src/routers/authRouter.js";
@@ -12,6 +13,7 @@ import reviewRouter from "./src/routers/reviewRouter.js"
 import verifyEmailRouter from "./src/routers/verifyEmailRouter.js"
 
 const PORT = process.env.PORT;
+dotenv.config();
 const app = express();
 
 // log middleware
@@ -21,12 +23,10 @@ if (process.env.NODE_ENV !== "production") {
   app.use(morgan("combined"));
 }
 
-// request body parser
 const allowedOrigins = [
   "https://lms-823yigjtd-ram-cpu-coders-projects.vercel.app",
   "https://lms-hazel-mu.vercel.app",
-  "https://lms-xi-jade.vercel.app",
-  "http://localhost:9001"
+  "https://lms-xi-jade.vercel.app"
 ];
 
 app.use(cors({
