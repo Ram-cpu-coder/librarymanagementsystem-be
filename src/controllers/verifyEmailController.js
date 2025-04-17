@@ -1,6 +1,7 @@
-import { findOTPByAssociate, findRegisterSessionById, insertOTP } from "../models/sessions/sessionSchema.js"
+import { deleteOTP, findOTPByAssociate, findRegisterSessionById, insertOTP } from "../models/sessions/sessionSchema.js"
 import { getUserByEmail, updateUser } from "../models/users/UserModel.js"
 import { sendOTP } from "../services/emailServices.js"
+import { compareText, encryptText } from "../utils/bcrypt.js"
 
 export const verifyEmailController = async (req, res, next) => {
     try {
@@ -96,8 +97,9 @@ export const verifyEmailAndSendOtp = async (req, res, next) => {
         console.log(error)
     }
 }
-export const verifyOtp = async ({ email, Otp }) => {
+export const verifyOtp = async (req, res, next) => {
     try {
+        const { email, Otp } = req.body
         // get the OTP from database
         const OTPFromDB = await findOTPByAssociate({ associate: email, OTP: Otp })
         if (!OTPFromDB) {
@@ -145,6 +147,12 @@ export const updatePassword = async (req, res, next) => {
         // get the OTP from user
         const { email, Otp, password, confirmPassword } = req.body;
 
+        if (password !== confirmPassword) {
+            return next({
+                statusCode: 404,
+                message: "Passwords didnot match!"
+            })
+        }
         const isOTPverified = await findOTPByAssociate({ associate: email, Otp: Otp })
         console.log(isOTPverified, 100)
 
@@ -154,7 +162,7 @@ export const updatePassword = async (req, res, next) => {
                 message: "Otp Not Verified!"
             })
         }
-        const foundUser = await getUserByEmail(associate)
+        const foundUser = await getUserByEmail(email)
         const isPasswordSame = await compareText(password, foundUser.password)
         if (isPasswordSame) {
             return res.status(404).json({

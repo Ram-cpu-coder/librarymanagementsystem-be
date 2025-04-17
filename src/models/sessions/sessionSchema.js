@@ -22,7 +22,7 @@ const otpSchema = new mongoose.Schema({
     },
     expiresAt: {
         type: Date,
-        default: new Date(Date.now() + 36000),
+        default: new Date(Date.now() + 3600000),
         expires: 0
     },
     associate: {
@@ -41,7 +41,7 @@ const registerSessionSchema = new mongoose.Schema({
     createdAt:
     {
         type: Date,
-        default: new Date(Date.now() + 36000),
+        default: new Date(Date.now() + 3600000),
         expires: 0
     }
 })
