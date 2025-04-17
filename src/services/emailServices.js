@@ -6,7 +6,7 @@ export const userActivationEmail = async (obj) => {
     return info.messageId;
 }
 
-export const sendOTP = async ({ email, fName, OTPforgotPassword }) => {
-    const info = await eTransporter().sendMail(sendingOTP({ email, fName, OTPforgotPassword }))
+export const sendOTP = async ({ email, fName, Otp }) => {
+    const info = await eTransporter().sendMail(sendingOTP({ email, fName, Otp }))
     return info.messageId
 }

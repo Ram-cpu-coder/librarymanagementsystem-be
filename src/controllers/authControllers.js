@@ -4,7 +4,6 @@ import { createNewUser, deleteUserById, getStudents, getUserByEmail, getUsersMod
 import { sendOTP, userActivationEmail } from "../services/emailServices.js";
 import { compareText, encryptText } from "../utils/bcrypt.js";
 import { jwtSign, refreshJwtSign } from "../utils/jwt.js";
-import { generateOTPController, verifyOTPForgotPassword } from "./verifyEmailController.js";
 
 
 export const login = async (req, res, next) => {
@@ -125,95 +124,6 @@ export const register = async (req, res, next) => {
     });
   }
 };
-
-export const forgotPassword = async (req, res, next) => {
-  try {
-    const { email } = req.body
-    // find the user 
-    const user = await getUserByEmail(email)
-
-    // Check if user exists
-    if (!user) {
-      return res.status(404).json({
-        status: "error",
-        message: "User not found",
-      });
-    }
-    const { fName } = user
-
-    const OTPforgotPassword = await generateOTPController()
-
-    // setting the expiry time
-    const today = new Date();
-
-    if (OTPforgotPassword) {
-      const otpObj = {
-        OTP: OTPforgotPassword,
-        associate: email
-      }
-      await insertOTP(otpObj)
-    }
-    await sendOTP({ email, fName, OTPforgotPassword })
-    return res.status(200).json({
-      status: "success",
-      message: "OTP has been sent successfully!"
-    })
-
-  } catch (error) {
-    console.log(error.message, 234)
-    return next({
-      statusCode: 500,
-      message: error.message,
-    })
-  }
-}
-
-// update password
-export const updatePassword = async (req, res, next) => {
-  try {
-    // get the OTP from user
-    const { associate, OTP, password } = req.body;
-
-    const isOTPverified = await verifyOTPForgotPassword({ associate, OTP })
-    console.log(isOTPverified, 100)
-
-    if (isOTPverified !== "OTP has been Verified!") {
-      return next({
-        statusCode: 400,
-        message: isOTPverified
-      })
-    } else {
-      const foundUser = await getUserByEmail(associate)
-      const hashedPw = await encryptText(password)
-      // encryption of the password
-
-      const updatedPassword = await updateUser(foundUser._id, { password: hashedPw })
-      console.log(updatedPassword, "pselgjsdjlg")
-      if (!updatedPassword) {
-        next({
-          statusCode: 400,
-          message: "Error in updating Password!"
-        })
-      }
-      if (updatedPassword) {
-        const foundOTPdB = await findOTPByAssociate({ associate, OTP })
-        console.log(foundOTPdB, 3495)
-        await deleteOTP(foundOTPdB._id)
-      }
-    }
-    return res.status(200).json({
-      status: "success",
-      message: "Password changed successfully!"
-    })
-
-  } catch (error) {
-    console.log(error.message, "Error")
-    return next({
-      statusCode: 500,
-      message: error.message
-    })
-  }
-}
 
 export const getUserDetail = async (req, res, next) => {
 

@@ -22,18 +22,15 @@ const otpSchema = new mongoose.Schema({
     },
     expiresAt: {
         type: Date,
-        default: new Date(Date.now() + 15 * 60 * 1000)
-    },
-    createdAt: {
-        type: Date,
-        default: Date.now
+        default: new Date(Date.now() + 36000),
+        expires: 0
     },
     associate: {
         type: String,
         required: true
     }
 
-})
+}, { timestamps: true })
 
 // login session 
 const sessionSchema = new mongoose.Schema(baseSessionSchema, { timestamps: true })
@@ -43,7 +40,9 @@ const registerSessionSchema = new mongoose.Schema({
     ...baseSessionSchema,
     createdAt:
     {
-        type: Date, default: Date.now, expires: 60 * 60 * 1 * 24
+        type: Date,
+        default: new Date(Date.now() + 36000),
+        expires: 0
     }
 })
 
@@ -81,8 +80,8 @@ export const insertOTP = (otpObj) => {
     return OTPSchema(otpObj).save()
 }
 
-export const findOTPByAssociate = ({ associate, otp }) => {
-    return OTPSchema.findOne({ associate, otp })
+export const findOTPByAssociate = ({ filterObj }) => {
+    return OTPSchema.findOne({ filterObj })
 }
 
 export const deleteOTP = (_id) => {

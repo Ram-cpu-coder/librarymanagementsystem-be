@@ -21,7 +21,7 @@ export const userActivationEmailTemplate = ({ email, userName, url }) => {
 
 
 
-export const sendingOTP = ({ email, fName, OTPforgotPassword }) => {
+export const sendingOTP = ({ email, fName, Otp }) => {
     return ({
         from: `${process.env.COMPANY_NAME} <${process.env.SMTP_USER}>`,
         to: email,
@@ -29,7 +29,7 @@ export const sendingOTP = ({ email, fName, OTPforgotPassword }) => {
         html: `<div style = "text-align : center; width: 100%">
         <h1>Hello ${fName},</h1>
         <p>Please enter the given OTP to change your password!</p> 
-       <span style = "border : 1px solid black; padding: 10px 20px; background : white; color: black">${OTPforgotPassword}</span>
+       <span style = "border : 1px solid black; padding: 10px 20px; background : white; color: black">${Otp}</span>
         <p>Regards</p>
         <p>Ram<p/>
         <p>Manager</p>
