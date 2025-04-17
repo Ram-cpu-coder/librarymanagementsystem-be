@@ -26,7 +26,8 @@ if (process.env.NODE_ENV !== "production") {
 const allowedOrigins = [
   "https://lms-823yigjtd-ram-cpu-coders-projects.vercel.app",
   "https://lms-hazel-mu.vercel.app",
-  "https://lms-xi-jade.vercel.app"
+  "https://lms-xi-jade.vercel.app",
+  'http://localhost:5173'
 ];
 
 app.use(cors({
