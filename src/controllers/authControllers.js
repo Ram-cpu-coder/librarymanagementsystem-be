@@ -21,6 +21,12 @@ export const login = async (req, res, next) => {
         message: "Verify your Account please!"
       })
     }
+    if (!userData) {
+      return res.status(401).json({
+        status: "error",
+        message: "User not Found!"
+      })
+    }
     if (userData && userData.isVerified === true) {
       // compare plain password and encrypted password
       const loginSuccess = await compareText(password, userData.password);
